@@ -16,7 +16,7 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className='page'>
         
-            <Header auth={true}/>
+            <Header auth={false}/>
             <Main />
             <Footer />
       </div>
