@@ -1,27 +1,27 @@
 .nav-profile-btn {
-    padding: 0;
-    margin: 0;
-    border: none;
-    min-height: 32px;
-    min-width: 100px;
-    border-radius: 15px;
+  padding: 0;
+  margin: 0;
+  border: none;
+  min-height: 32px;
+  min-width: 100px;
+  border-radius: 15px;
 }
 
 .nav-profile-btn-link {
-    padding: 0;
-    margin: 0;
-    text-decoration: none;
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
 }
 
 .nav-profile-btn:hover {
-    transition: 1s ease-in;
-    opacity: .6;
+  transition: 1s ease-in;
+  opacity: 0.6;
 }
 
 .nav-profile-btn__text {
-    margin: 0 auto;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 18px;
-    color: #000;
+  margin: 0 auto;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  color: #000;
 }
