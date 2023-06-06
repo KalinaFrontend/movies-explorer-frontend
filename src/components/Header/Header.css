@@ -1,9 +1,12 @@
 .header {
-  margin: 0 auto 0 auto;
-  max-width: 1280px;
-  min-height: 74px;
-  padding: 0;
+  margin: 0px auto 0px;
+  padding: 0px 70px 0px;
   display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1140px;
+  min-height: 74px;
   align-items: center;
   flex-direction: row;
   justify-content: space-between;
@@ -16,7 +19,9 @@
 }
 
 .header__logo-container {
-  margin: 18px 0 18px 70px;
+  display: flex;
+  align-items: center;
+  margin: 18px 0px 18px 0px;
 }
 
 @media screen and (max-width: 768px) {

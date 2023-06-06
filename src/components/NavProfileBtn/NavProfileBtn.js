@@ -1,7 +1,7 @@
 import React from 'react';
 import './NavProfileBtn.css'
 
-function NavProfileBtn() {
+function NavProfileBtn(props) {
   return (
     <button className='nav-profile-btn' type='button'>
       <a className='nav-profile-btn-link' href='/profile'>

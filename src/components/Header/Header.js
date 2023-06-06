@@ -4,6 +4,7 @@ import Logo from "../Logo/Logo";
 import HeaderAuth from "../HeaderAuth/HeaderAuth";
 import HeaderNav from "../HeaderNav/HeaderNav";
 import Navigation from '../Navigation/Navigation';
+import NavProfileBtn from "../NavProfileBtn/NavProfileBtn";
 
 const Header = ({auth}) => {
 
@@ -21,9 +22,12 @@ const Header = ({auth}) => {
     <header className='header'>
       <div className='header__logo-container'>
         <Logo />
-      </div>
-      {!auth ? <HeaderAuth /> :  <HeaderNav onClick={handleClickOpen}/>}
+        {auth && <HeaderNav onClick={handleClickOpen}/>}
+        
       <Navigation isOpen={isOpen} onClick={handleClickClose} />
+      </div>
+      {!auth ? <HeaderAuth /> : <NavProfileBtn isOpen={isOpen}/>}
+      
     </header>
   );
 }

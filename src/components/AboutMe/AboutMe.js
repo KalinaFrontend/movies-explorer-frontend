@@ -17,7 +17,7 @@ function AboutMe() {
             С 2011 года работаю системным администратором крупной сети. После того, как прошёл курс по веб-разработке, 
             начал заниматься фриланс-заказами, сейчас занят поиском работы но веб-разработке.</p>
           <p className='about-me__github-link-container'>
-            <a className='about-me__github-link' href='https://github.com/KalinaFrontend' target="_blank">
+            <a className='about-me__github-link' href='https://github.com/KalinaFrontend' target="_blank" rel="noreferrer">
               Github
             </a>
           </p>
@@ -27,19 +27,19 @@ function AboutMe() {
       <p className='about-me__portfolio-link'>Портфолио</p>
       <ul className='about-me__navigation'>
         <li>
-          <a className='about-me__link-container' href='https://kalinafrontend.github.io/How-to-learn/' target="_blank">
+          <a className='about-me__link-container' href='https://kalinafrontend.github.io/How-to-learn/' target="_blank" rel="noreferrer">
             <p className='about-me__link-name'>Статичный сайт</p>
             <img className='about-me__link-arrow' src={arrow} alt='стрелка'/>
           </a>
         </li>
         <li>
-          <a className='about-me__link-container' href='https://kalinafrontend.github.io/Travel-in-Russia/' target="_blank">
+          <a className='about-me__link-container' href='https://kalinafrontend.github.io/Travel-in-Russia/' target="_blank" rel="noreferrer">
             <p className='about-me__link-name'>Адаптивный сайт</p>
             <img className='about-me__link-arrow' src={arrow} alt='стрелка'/>
           </a>
         </li>
         <li>
-          <a className='about-me__link-container' href='https://mesto-react-kalina.nomoredomains.monster' target="_blank">
+          <a className='about-me__link-container' href='https://mesto-react-kalina.nomoredomains.monster' target="_blank" rel="noreferrer">
             <p className='about-me__link-name'>Одностраничное приложение</p>
             <img className='about-me__link-arrow' src={arrow} alt='стрелка'/>
           </a>
