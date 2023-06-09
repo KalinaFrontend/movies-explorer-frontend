@@ -1,6 +1,5 @@
 import React from "react";
 import "./HeaderNav.css";
-import NavProfileBtn from "../NavProfileBtn/NavProfileBtn";
 
 function HeaderNav(props) {
   return (
@@ -15,11 +14,6 @@ function HeaderNav(props) {
           </a>
         </div>
       </nav>
-      <button
-        className="header-nav__menu-button"
-        type="button"
-        onClick={props.onClick}
-      ></button>
     </div>
   );
 }

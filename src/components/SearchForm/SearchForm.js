@@ -8,7 +8,7 @@ function SearchForm() {
     <form className="search">
       <div className="search__container">
         <img
-          className="search__search-image"
+          className="search__search-image search__search-image-none"
           src={search}
           alt="кнопка поиска"
         />
@@ -34,6 +34,13 @@ function SearchForm() {
           <p className="search__films">Короткометражки</p>
         </div>
       </div>
+      <div className="search__toggle search__toggle_mini-size">
+          <label className="search__tumbler">
+            <input type="checkbox" className="search__checkbox" />
+            <span className="search__slider" />
+          </label>
+          <p className="search__films">Короткометражки</p>
+        </div>
     </form>
   );
 }

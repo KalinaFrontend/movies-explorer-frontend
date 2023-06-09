@@ -22,8 +22,8 @@
   height: 100%;
   margin: 0 0 0 auto;
   max-width: 520px;
-  background-color: #202020;
-  color: #ffffff;
+  background-color: #ffffff;
+  color: #000000;
   position: relative;
   box-sizing: border-box;
   display: flex;
@@ -34,12 +34,12 @@
 .navigation__close {
   padding: 0;
   position: absolute;
-  right: 22px;
-  top: 52px;
+  right: 30px;
+  top: 47px;
   max-width: 22px;
   min-height: 22px;
   background-position: center;
-  background-color: #202020;
+  background-color: #ffffff;
   cursor: pointer;
   border: none;
 }
@@ -57,7 +57,7 @@
 }
 
 .navigation__close-img {
-  max-width: 22px;
+  max-width: 30px;
 }
 
 .navigation__links {
@@ -85,7 +85,7 @@
 }
 
 .navigation__link-container:hover {
-  border-bottom: #ffffff 2px solid;
+  border-bottom: #000000 2px solid;
 }
 
 @media screen and (max-width: 540px) {
@@ -98,7 +98,7 @@
   font-weight: 500;
   font-size: 18px;
   line-height: 22px;
-  color: #ffffff;
+  color: #000000;
   text-decoration: none;
   border-bottom: none;
 }
@@ -109,6 +109,10 @@
   justify-content: flex-end;
   flex-direction: column;
   align-items: center;
+}
+
+.navigation__link-container_none:hover {
+  border-bottom: none;
 }
 
 @media screen and (max-width: 540px) {

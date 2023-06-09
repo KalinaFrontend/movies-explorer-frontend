@@ -10,7 +10,7 @@
 @media screen and (max-width: 768px) {
   .about-project {
     max-width: 768px;
-    min-height: 585px;
+    min-height: 560px;
   }
 }
 
@@ -26,7 +26,7 @@
   min-height: 50px;
   max-width: 1280px;
   font-weight: 400;
-  font-size: 22px;
+  font-size: 21px;
   line-height: 27px;
   color: #000;
   border-bottom: #000 1px solid;
@@ -34,8 +34,8 @@
 
 @media screen and (max-width: 1024px) {
   .about-project__title {
-    margin: 0 50px 0 50px;
-    padding-top: 90px;
+    margin: 0px 50px 0 50px;
+    padding-top: 68px;
   }
 }
 
@@ -112,8 +112,8 @@
   margin-top: 0;
   margin-bottom: 26px;
   font-weight: 400;
-  font-size: 20px;
-  line-height: 24px;
+  font-size: 19px;
+  line-height: 22px;
   color: #000;
 }
 
@@ -159,7 +159,7 @@
 
 @media screen and (max-width: 1024px) {
   .about-project__time-container {
-    margin: 0 50px 90px 50px;
+    margin: 0 50px 0px 50px;
     grid-template-columns: 140px auto;
   }
 }

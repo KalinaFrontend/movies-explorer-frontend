@@ -12,6 +12,12 @@
   }
 }
 
+@media screen and (max-width: 400px) {
+  .header-auth {
+    min-width: 0px;
+  }
+}
+
 .header-auth__link {
   margin-right: 30px;
   font-style: normal;
@@ -57,15 +63,10 @@
   opacity: 0.6;
 }
 
-@media screen and (max-width: 768px) {
-  .header-auth__entry-button {
-    margin-right: 30px;
-  }
-}
-
 @media screen and (max-width: 480px) {
   .header-auth__entry-button {
-    margin-right: 14px;
+    min-width: 53px;
+    min-height: 29px;
     font-size: 10px;
   }
 }

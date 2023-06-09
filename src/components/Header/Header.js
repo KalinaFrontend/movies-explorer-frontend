@@ -11,6 +11,7 @@ const Header = ({auth}) => {
   const [isOpen, setIsOpen] = React.useState(false);
 
   function handleClickOpen () {
+    console.log('тут');
     setIsOpen(true)
   }
 
@@ -23,10 +24,9 @@ const Header = ({auth}) => {
       <div className='header__logo-container'>
         <Logo />
         {auth && <HeaderNav onClick={handleClickOpen}/>}
-        
-      <Navigation isOpen={isOpen} onClick={handleClickClose} />
       </div>
-      {!auth ? <HeaderAuth /> : <NavProfileBtn isOpen={isOpen}/>}
+      {!auth ? <HeaderAuth /> : <NavProfileBtn isOpen={handleClickOpen}/>}
+      <Navigation isOpen={isOpen} onClick={handleClickClose} />
       
     </header>
   );
