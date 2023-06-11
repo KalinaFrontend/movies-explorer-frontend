@@ -9,7 +9,8 @@
 
 @media screen and (max-width: 768px) {
   .movies-card__card {
-    min-height: 258px;
+    max-width: 339px;
+    max-height: 258px;
   }
 }
 

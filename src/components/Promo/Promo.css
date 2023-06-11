@@ -16,8 +16,8 @@
 
 @media screen and (max-width: 768px) {
   .promo {
-    margin: 20px 20px 20px;
-    max-width: 768px;
+    margin: 18px 20px 20px;
+    max-width: 728px;
     min-height: 834px;
   }
 }
@@ -45,8 +45,12 @@
 @media screen and (max-width: 768px) {
   .promo__title {
     padding-top: 350px;
-    font-size: 37px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
     line-height: 52px;
+    text-align: center;
+    letter-spacing: -0.04em;
   }
 }
 

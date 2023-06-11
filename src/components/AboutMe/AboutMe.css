@@ -12,7 +12,7 @@
 
 @media screen and (max-width: 768px) {
   .about-me {
-    margin: 0 auto 145px;
+    margin: 0 auto 78px;
   }
 }
 
@@ -184,6 +184,12 @@
   }
 }
 
+@media screen and (max-width: 768px) {
+  .about-me__github-link-container {
+    margin-top: 34px;
+  }
+}
+
 @media screen and (max-width: 320px) {
   .about-me__github-link-container {
     margin-top: 40px;
@@ -212,6 +218,13 @@
 @media screen and (max-width: 1080px) {
   .about-me__foto {
     margin-left: 15px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .about-me__foto {
+    max-width: 255px;
+    max-height: 307px;
   }
 }
 

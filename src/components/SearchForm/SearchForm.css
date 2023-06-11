@@ -129,8 +129,8 @@
 @media screen and (max-width: 768px) {
   .search {
     flex-direction: column;
-    margin: 0 30px 0;
-    padding: 80px 0 120px;
+    margin: -2px 30px 0;
+    padding: 80px 0 108px;
   }
 
   .search__container {
@@ -144,11 +144,19 @@
 
   .search__films {
     padding-left: 0px;
+    padding-right: 20px;
   }
 
   .search__border {
-    margin: 0 25px 0;
+    margin: 0 18px 0;
   }
+
+  .search__search-image {
+    margin-left: 19px;
+    width: 34px;
+    height: 34px;
+  }
+  
 }
 
 @media screen and (max-width: 540px) {

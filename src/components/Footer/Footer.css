@@ -5,13 +5,6 @@
   min-height: 56px;
 }
 
-@media screen and (max-width: 768px) {
-  .footer {
-    max-width: 768px;
-    margin: 79px auto 0 auto;
-  }
-}
-
 .footer__title {
   margin: 79px 70px 0px;
   padding: 0 0 20px 0;
@@ -22,6 +15,12 @@
   line-height: 16px;
   text-align: center;
   border-bottom: #E8E8E8 1px solid;
+}
+
+@media screen and (max-width: 768px) {
+  .footer__title {
+    margin: 0px 24px 0px 36px;
+  }
 }
 
 .footer__container {

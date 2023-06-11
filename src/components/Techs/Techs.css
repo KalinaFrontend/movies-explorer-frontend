@@ -7,9 +7,9 @@
 
 @media screen and (max-width: 768px) {
   .technology {
-    min-height: 567px;
+    min-height: 571px;
   }
-}
+} 
 
 @media screen and (max-width: 320px) {
   .technology {
@@ -40,6 +40,7 @@
 @media screen and (max-width: 768px) {
   .technology__title {
     max-width: 668px;
+    padding-top: 94px;
   }
 }
 
@@ -91,9 +92,13 @@
 
 @media screen and (max-width: 768px) {
   .technology__description {
-    margin-bottom: 83px;
+    margin: 0 auto 82px;
+    font-style: normal;
+    font-weight: 400;
     font-size: 12px;
     line-height: 18px;
+    text-align: center;
+    letter-spacing: -0.04em;
   }
 }
 
@@ -138,9 +143,10 @@
   margin-right: 0;
 }
 
-@media screen and (max-width: 720px) {
+@media screen and (max-width: 768px) {
   .technology__link {
     margin: 0;
+    margin-right: 10px;
   }
   .technology__link:last-of-type {
     margin-bottom: 70px;
@@ -170,6 +176,8 @@
 
 @media screen and (max-width: 768px) {
   .technology__button {
+    min-width: 84px;
+    min-height: 57px;
     font-size: 12px;
     line-height: 15px;
   }
