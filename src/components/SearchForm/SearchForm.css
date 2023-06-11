@@ -161,8 +161,8 @@
 
 @media screen and (max-width: 540px) {
   .search {
-    margin: 0 15px 0;
-    padding-bottom: 40px;
+    margin: 0 10px 0;
+    padding: 80px 0 42px;
   }
 
   .search__container {
@@ -171,9 +171,13 @@
   }
 
   .search__input {
-    padding: 0 8px;
+    padding: 0px 19px 7px;
     font-size: 14px;
     line-height: 20px;
+  }
+
+  .search__search-image {
+    margin-right: -4px;
   }
 
   .search__search-image-none {
@@ -200,6 +204,7 @@
   }
 
   .search__films {
+    padding-right: 2px;
     font-size: 11px;
   }
 }

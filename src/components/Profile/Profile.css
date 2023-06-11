@@ -40,8 +40,8 @@
 
 @media screen and (max-width: 320px) {
     .profile__title {
-        margin-top: 70px;
-        margin-bottom: 80px;
+        margin-top: 68px;
+        margin-bottom: 65px;
     }
 }
 
@@ -95,7 +95,7 @@
 
 @media screen and (max-width: 480px) {
     .profile__link {
-        margin-top: 379px;
+        margin-top: 360px;
         font-size: 12px;
         line-height: 15px;
     }

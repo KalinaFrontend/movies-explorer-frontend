@@ -7,7 +7,7 @@ function Techs() {
       <h3 className='technology__title'>Технологии</h3>
       <h4 className='technology__description-title'>7 технологий</h4>
       <p className='technology__description'>На курсе веб-разработки мы освоили технологии,
-        которые применили в <br/> дипломном проекте.</p>
+        которые применили в дипломном проекте.</p>
       <nav className='technology__navigation'>
         <a className='technology__link' href='https://ru.wikipedia.org/wiki/HTML' target="_blank" rel="noreferrer">
           <button className='technology__button' type='button'>HTML</button>

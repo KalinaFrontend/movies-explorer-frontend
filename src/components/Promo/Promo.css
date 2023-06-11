@@ -56,10 +56,14 @@
 
 @media screen and (max-width: 400px) {
   .promo__title {
-    padding-top: 215px;
+    margin: 0 auto 0;
+    max-width: 290px;
+    padding-top: 219px;
+    padding-bottom: 31px;
     font-style: normal;
     font-weight: 400;
-    font-size: 28px;
+    font-size: 29px;
     line-height: 37px;
+    letter-spacing: -0.04em;
   }
 }
