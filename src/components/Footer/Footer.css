@@ -13,14 +13,14 @@
 }
 
 .footer__title {
-  margin: 79px 25px 0px;
+  margin: 79px 70px 0px;
   padding: 0 0 20px 0;
-  align-self: center;
-  text-align: center;
   color: #A0A0A0;
+  font-style: normal;
   font-weight: 400;
   font-size: 13px;
   line-height: 16px;
+  text-align: center;
   border-bottom: #E8E8E8 1px solid;
 }
 
@@ -51,10 +51,11 @@
 .footer__copyring {
   margin: 20px 0 20px 0;
   padding: 0;
-  align-self: center;
+  font-style: normal;
   font-weight: 400;
   font-size: 13px;
   line-height: 16px;
+  color: #000000;
 }
 
 @media screen and (max-width: 480px) {

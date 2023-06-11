@@ -1,4 +1,5 @@
 import React from "react";
+import { Link, NavLink } from 'react-router-dom';
 import "./Navigation.css";
 import close from "../../images/navigation__close.svg";
 import "../NavProfileBtn/NavProfileBtn.css";
@@ -20,28 +21,20 @@ function Navigation(props) {
         </button>
         <ul className="navigation__links">
           <li className="navigation__link-container">
-            <a className="navigation__link" href="/">
-              Главная
-            </a>
+            <NavLink to="/" className={({ isActive }) => isActive ? "navigation__link navigation__link_active" : "navigation__link"}>Главная</NavLink>
           </li>
           <li className="navigation__link-container">
-            <a className="navigation__link" href="/movies">
-              Фильмы
-            </a>
+            <NavLink to="/movies" className={({ isActive }) => isActive ? "navigation__link navigation__link_active" : "navigation__link"}>Фильмы</NavLink>
           </li>
           <li className="navigation__link-container">
-            <a className="navigation__link" href="/saved-movies">
-              Сохраненные фильмы
-            </a>
+            <NavLink to="/saved-movies" className={({ isActive }) => isActive ? "navigation__link navigation__link_active" : "navigation__link"}>Сохраненные фильмы</NavLink>
           </li>
           <li className="navigation__link-container navigation__link-container_none">
             <button
               className="nav-profile-btn nav-profile-btn__display_open"
               type="button"
             >
-              <a className="nav-profile-btn-link" href="/profile">
-                <p className="nav-profile-btn__text">Аккаунт</p>
-              </a>
+              <Link className="nav-profile-btn-link" to="/profile"><p className="nav-profile-btn__text">Аккаунт</p></Link>
             </button>
           </li>
         </ul>

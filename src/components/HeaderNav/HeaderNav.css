@@ -15,8 +15,9 @@
 
 .header-nav__link {
   margin: 0 50px 0 0;
+  font-style: normal;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 13px;
   line-height: 18px;
   color: #000;
   cursor: pointer;
@@ -74,4 +75,10 @@
     min-height: 43px;
     min-width: 40px;
   }
+}
+
+.header-nav__link_active {
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 18px;
 }

@@ -56,10 +56,11 @@
   
 
 .portfolio__link-name {
-    margin: 20px auto 20px 0;
+    margin: 19px auto 20px 0;
     font-weight: 400;
     font-size: 30px;
     line-height: 50px;
+    letter-spacing: -0.04em;
   }
   
   @media screen and (max-width: 768px) {
@@ -87,8 +88,9 @@
 
   
 .portfolio__link-arrow {
+    padding: 3px 6px 0 0;
     max-width: 29px;
-    min-height: 60px;
+    max-height: 60px;
     object-fit: fill;
     cursor: pointer;
   }

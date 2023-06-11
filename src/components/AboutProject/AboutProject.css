@@ -25,9 +25,11 @@
   margin: 110px 70px 0 70px;
   min-height: 50px;
   max-width: 1280px;
+  font-style: normal;
   font-weight: 400;
-  font-size: 21px;
+  font-size: 22px;
   line-height: 27px;
+  letter-spacing: -0.04em;
   color: #000;
   border-bottom: #000 1px solid;
 }
@@ -80,7 +82,7 @@
 }
 
 .about-project__card {
-  margin: 70px 20px 110px 0;
+  margin: 70px 40px 110px 0;
   max-width: 550px;
   display: flex;
   flex-direction: column;
@@ -111,9 +113,11 @@
 .about-project__card-title {
   margin-top: 0;
   margin-bottom: 26px;
+  font-style: normal;
   font-weight: 400;
-  font-size: 19px;
-  line-height: 22px;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: -0.04em;
   color: #000;
 }
 
@@ -122,7 +126,6 @@
     margin-bottom: 16px;
     font-size: 18px;
     line-height: 22px;
-    letter-spacing: -0.04em;
   }
 }
 

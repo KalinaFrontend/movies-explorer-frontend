@@ -1,5 +1,5 @@
 .promo {
-  margin: 20px 40px 0 40px;
+  margin: 18px 40px 0 40px;
   padding: 0;
   min-height: 493px;
   max-width: 1200px;
@@ -38,6 +38,7 @@
   font-size: 50px;
   line-height: 58px;
   text-align: center;
+  letter-spacing: -0.04em;
   color: #000;
 }
 

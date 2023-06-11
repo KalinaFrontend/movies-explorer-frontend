@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from 'react-router-dom';
 import "./HeaderNav.css";
 
 function HeaderNav(props) {
@@ -6,12 +7,8 @@ function HeaderNav(props) {
     <div className="header-nav">
       <nav className="header-nav__container">
         <div>
-          <a className="header-nav__link" href="/movies">
-            Фильмы
-          </a>
-          <a className="header-nav__link" href="/saved-movies">
-            Сохраненные фильмы
-          </a>
+          <NavLink to="/movies" className={({ isActive }) => isActive ? "header-nav__link header-nav__link_active" : "header-nav__link"}>Фильмы</NavLink>
+          <NavLink to="/saved-movies" className={({ isActive }) => isActive ? "header-nav__link header-nav__link_active" : "header-nav__link"}>Сохраненные фильмы</NavLink>
         </div>
       </nav>
     </div>

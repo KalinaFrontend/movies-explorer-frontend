@@ -6,6 +6,7 @@
   min-height: 32px;
   min-width: 100px;
   border-radius: 15px;
+  background-color: #F9F9F9;
 }
 
 .nav-profile-btn_is-close {
@@ -40,6 +41,12 @@
 .nav-profile-btn__display_open {
   display: block;
   margin-top: 593px;
+}
+
+@media screen and (max-width: 768px) {
+  .nav-profile-btn__display_open {
+    margin-top: 415px;
+  }
 }
 
 .nav-profile-menu {

@@ -84,10 +84,6 @@
   padding-top: 159px;
 }
 
-.navigation__link-container:hover {
-  border-bottom: #000000 2px solid;
-}
-
 @media screen and (max-width: 540px) {
   .navigation__link-container:first-of-type {
     padding-top: 144px;
@@ -111,12 +107,12 @@
   align-items: center;
 }
 
-.navigation__link-container_none:hover {
-  border-bottom: none;
-}
-
 @media screen and (max-width: 540px) {
   .navigation__button-container {
     margin-bottom: 48px;
   }
+}
+
+.navigation__link_active {
+  border-bottom: #000000 2px solid;
 }
