@@ -1,7 +1,7 @@
 import React from "react";
 import "./AboutMe.css";
+import Portfolio from "../Portfolio/Portfolio";
 import foto from '../../images/about-me__foto.jpg';
-import arrow from "../../images/about-me__link-arrow.svg";
 
 function AboutMe() {
   return (
@@ -24,27 +24,7 @@ function AboutMe() {
         </div>
         <img className='about-me__foto' src={foto} alt='фотография студента' />
       </div>
-      <p className='about-me__portfolio-link'>Портфолио</p>
-      <ul className='about-me__navigation'>
-        <li>
-          <a className='about-me__link-container' href='https://kalinafrontend.github.io/How-to-learn/' target="_blank" rel="noreferrer">
-            <p className='about-me__link-name'>Статичный сайт</p>
-            <img className='about-me__link-arrow' src={arrow} alt='стрелка'/>
-          </a>
-        </li>
-        <li>
-          <a className='about-me__link-container' href='https://kalinafrontend.github.io/Travel-in-Russia/' target="_blank" rel="noreferrer">
-            <p className='about-me__link-name'>Адаптивный сайт</p>
-            <img className='about-me__link-arrow' src={arrow} alt='стрелка'/>
-          </a>
-        </li>
-        <li>
-          <a className='about-me__link-container' href='https://mesto-react-kalina.nomoredomains.monster' target="_blank" rel="noreferrer">
-            <p className='about-me__link-name'>Одностраничное приложение</p>
-            <img className='about-me__link-arrow' src={arrow} alt='стрелка'/>
-          </a>
-        </li>
-      </ul>
+      <Portfolio />
     </section>
   );
 }
