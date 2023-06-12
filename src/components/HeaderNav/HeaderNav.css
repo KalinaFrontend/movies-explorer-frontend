@@ -2,9 +2,12 @@
 }
 
 .header-nav__container {
-  margin-left: 44px;
+  margin-left: 3px;
   margin-right: 5.47vw;
   min-width: 221px;
+  list-style-type:none;
+  display: flex;
+  flex-direction: row;
 }
 
 @media screen and (max-width: 768px) {

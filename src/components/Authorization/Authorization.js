@@ -10,7 +10,7 @@ function Authorization(props) {
           <div className='authorization__logo-container'>
             <Logo />
           </div>
-          <p className='authorization__text'>{props.title}</p>
+          <h1 className='authorization__text'>{props.title}</h1>
         </div>
       </div>
       <form>

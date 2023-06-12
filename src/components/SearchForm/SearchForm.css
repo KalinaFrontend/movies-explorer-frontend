@@ -28,7 +28,7 @@
 
 .search__input:focus {
   width: 90%;
-  outline: 1px solid black;
+  outline: 1px solid #f9f9f9;
   border-radius: 50px;
 }
 
@@ -111,6 +111,11 @@
 
 .search__checkbox:checked + .search__slider::before {
   transform: translateX(16px);
+}
+
+.search__slider:hover {
+  opacity: 0.4;
+  cursor: pointer;
 }
 
 .search__border {

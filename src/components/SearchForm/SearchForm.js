@@ -5,7 +5,8 @@ import searchBtn from "../../images/search__button-btn.svg";
 
 function SearchForm() {
   return (
-    <form className="search">
+    <section className="search">
+    <form className="search__form">
       <div className="search__container">
         <img
           className="search__search-image search__search-image-none"
@@ -42,6 +43,7 @@ function SearchForm() {
           <p className="search__films">Короткометражки</p>
         </div>
     </form>
+    </section>
   );
 }
 

@@ -18,7 +18,7 @@
   }
 }
 
-.header-auth__link {
+.header-auth__singup-button {
   margin-right: 30px;
   font-style: normal;
   font-weight: 500;
@@ -27,15 +27,17 @@
   text-decoration: none;
   cursor: pointer;
   color: #000000;
+  background-color: white;
+  border: none;
 }
 
-.header-auth__link:hover {
+.header-auth__singup-button:hover {
   transition: 1s ease-in;
   opacity: 0.5;
 }
 
 @media screen and (max-width: 480px) {
-  .header-auth__link {
+  .header-auth__singup-button {
     margin-right: 14px;
     font-size: 10px;
   }

@@ -74,6 +74,14 @@
     text-decoration: none;
 }
 
+.not-find-page__link:hover {
+    transform: 1.5s;
+    color: black;
+    opacity: 0.6;
+    cursor: pointer;
+  }
+  
+
 @media screen and (max-width: 480px) {
     .not-find-page__link {
         margin: 284px 0 30px 0;

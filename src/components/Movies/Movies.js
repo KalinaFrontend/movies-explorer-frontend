@@ -6,11 +6,13 @@ import ScrollMoviesBtn from "../ScrollMoviesBtn/ScrollMoviesBtn";
 
 const Movies = ({ cards }) => {
   return (
-    <section className="movies">
-      <SearchForm />
-      <MoviesCardList cards={cards} flag="add-favorites-btn" />
-      <ScrollMoviesBtn />
-    </section>
+    <main>
+      <section className="movies">
+        <SearchForm />
+        <MoviesCardList cards={cards} flag="add-favorites-btn" />
+        <ScrollMoviesBtn />
+      </section>
+    </main>
   );
 };
 

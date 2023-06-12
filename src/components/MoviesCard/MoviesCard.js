@@ -16,7 +16,7 @@ const MoviesCard = ({ card, flag }) => {
     <li className="movies-card__card">
       <div className="movies-card__info">
         <div className="movies-card__info-container">
-          <h4 className="movies-card__title">{card.nameRU}</h4>
+          <h2 className="movies-card__title">{card.nameRU}</h2>
           <p className="movies-card__time">{card.duration}</p>
         </div>
         <button
