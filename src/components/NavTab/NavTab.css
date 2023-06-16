@@ -1,7 +1,7 @@
 .nav-tab {
   margin: 151px 0 0 0;
   padding-bottom: 30px;
-  min-height: 36px;
+  min-height: 39px;
   align-self: center;
   display: flex;
   flex-direction: row;
@@ -10,13 +10,13 @@
 
 @media screen and (max-width: 768px) {
   .nav-tab {
-    margin-top: 314px;
+    margin-top: 315px;
   }
 }
 
 @media screen and (max-width: 480px) {
   .nav-tab {
-    margin-top: 180px;
+    margin-top: 182px;
     padding-bottom: 17px;
     min-height: 26px;
   }

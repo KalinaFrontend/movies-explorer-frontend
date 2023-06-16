@@ -19,7 +19,7 @@
 }
 
 .header-auth__singup-button {
-  margin-right: 30px;
+  margin-right: 25px;
   font-style: normal;
   font-weight: 500;
   font-size: 12px;
@@ -38,7 +38,8 @@
 
 @media screen and (max-width: 480px) {
   .header-auth__singup-button {
-    margin-right: 14px;
+    margin-right: 15px;
+    padding: 0 0 2px 0;
     font-size: 10px;
   }
 }

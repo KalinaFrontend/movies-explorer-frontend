@@ -19,17 +19,20 @@
   }
 }
 
-@media screen and (max-width: 620px) {
+@media screen and (max-width: 690px) {
   .movies-card-list__container {
-    margin: 0 10px 0 10px;
-    grid-template-columns: 100%;
-    grid-template-rows: max-content;
-    row-gap: 16px;
+    margin: 50px 10px 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+
   }
 }
 
 @media screen and (max-width: 400px) {
   .movies-card-list__container {
     margin: 50px 10px 0;
+    row-gap: 16px;
   }
 }

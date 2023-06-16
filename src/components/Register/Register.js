@@ -11,6 +11,7 @@ function Register() {
         text="Уже зарегистрированы?"
         link="Войти"
         linkRout="/signin"
+        name={["name", "email", "password"]}
       />
     </main>
   );

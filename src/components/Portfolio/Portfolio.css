@@ -40,6 +40,12 @@
   }
 }
 
+@media screen and (max-width: 600px) {
+  .portfolio__navigation {
+    margin: 22px 14px 70px 14px;
+  }
+}
+
 .portfolio__link-container {
   display: flex;
   justify-content: space-between;

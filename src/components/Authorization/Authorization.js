@@ -13,7 +13,7 @@ function Authorization(props) {
           <h1 className='authorization__text'>{props.title}</h1>
         </div>
       </div>
-      <form>
+      <form name={props.authType}>
       <ul className='authorization__container'>
         {props.authType === 'register' && (
         <li className='authorization__part-form'>

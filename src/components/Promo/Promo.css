@@ -16,22 +16,21 @@
 
 @media screen and (max-width: 768px) {
   .promo {
-    margin: 18px 20px 20px;
-    max-width: 728px;
-    min-height: 834px;
+    margin: 20px 20px 17px;
   }
 }
 
 @media screen and (max-width: 480px) {
   .promo {
-    margin: 14px 14px 0 14px;
+    margin: 15px 14px 0 14px;
     max-width: 480px;
     min-height: 586px;
   }
 }
 
 .promo__title {
-  margin: 0px;
+  margin: 0px auto 0px;
+  max-width: 850px;
   padding-top: 160px;
   font-style: normal;
   font-weight: 400;
@@ -44,6 +43,7 @@
 
 @media screen and (max-width: 768px) {
   .promo__title {
+    max-width: 550px;
     padding-top: 350px;
     font-style: normal;
     font-weight: 400;

@@ -6,7 +6,7 @@ import ScrollMoviesBtn from "../ScrollMoviesBtn/ScrollMoviesBtn";
 
 const Movies = ({ cards }) => {
   return (
-    <main>
+    <main className="content">
       <section className="movies">
         <SearchForm />
         <MoviesCardList cards={cards} flag="add-favorites-btn" />
