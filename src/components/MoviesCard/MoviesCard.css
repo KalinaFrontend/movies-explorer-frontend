@@ -90,7 +90,7 @@
 }
 
 .movies-card__delete-favorites-btn:hover {
-  background-image: url("../../images/movies-card__add-favorites-btn.svg");
+  opacity: 0.5;
   transition: 1.5s;
 }
 
