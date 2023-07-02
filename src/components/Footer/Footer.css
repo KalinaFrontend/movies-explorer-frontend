@@ -1,33 +1,38 @@
 .footer {
   margin: 0;
-  padding: 0;
+  padding: 0 70px;
   max-width: 1300px;
   min-height: 56px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 900px) {
   .footer {
-    margin: 80px auto 0;
+    padding: 0 30px;
     font-weight: 400;
     font-size: 13px;
     line-height: 16px;
     text-align: center;
-    min-width: 708px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .footer {
+    margin: 80px 0 0;
   }
 }
 
 
 @media screen and (max-width: 400px) {
   .footer {
+    padding: 0 10px;
     min-width: 300px;
-    margin: -2px auto 0;
-    padding-left: 0px;
+    margin: -3px 0;
   }
 }
 
 .footer__title {
-  margin: 79px 70px 0px;
-  padding: 0 0 20px 0;
+  margin: 79px 0px 0px;
+  padding: 0 0 20px;
   color: #a0a0a0;
   font-style: normal;
   font-weight: 400;
@@ -46,7 +51,7 @@
 
 @media screen and (max-width: 400px) {
   .footer__title {
-    margin: 0px 0px 0px;
+    margin: 0px;
     padding-top: 40px;
     font-weight: 400;
     font-size: 12px;
@@ -57,7 +62,6 @@
 
 .footer__container {
   margin: 0 auto 0 ;
-  max-width: 1140px;
   padding: 0;
   min-height: 56px;
   align-self: center;
