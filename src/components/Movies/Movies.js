@@ -5,13 +5,15 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import ScrollMoviesBtn from "../ScrollMoviesBtn/ScrollMoviesBtn";
 
 const Movies = ({ cards }) => {
+  
+
   return (
     <main className="content">
-      <section className="movies">
+      <div className="movies">
         <SearchForm />
         <MoviesCardList cards={cards} flag="add-favorites-btn" />
-        <ScrollMoviesBtn />
-      </section>
+        <ScrollMoviesBtn cards={cards} />
+      </div>
     </main>
   );
 };

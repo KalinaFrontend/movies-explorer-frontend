@@ -13,7 +13,7 @@
 }
 
 .navigation_is-opened {
-  top: -30px;
+  top: -24px;
   display: block;
 }
 
@@ -114,5 +114,6 @@
 }
 
 .navigation__link_active {
+  padding-bottom: 5px;
   border-bottom: #000000 2px solid;
 }

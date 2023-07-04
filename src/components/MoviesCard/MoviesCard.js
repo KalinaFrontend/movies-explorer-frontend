@@ -14,12 +14,7 @@ const MoviesCard = ({ card, flag }) => {
 
   return (
     <li className="movies-card__card">
-      <a
-        href="https://www.kinopoisk.ru/film/1302273/?utm_referrer=yandex.ru"
-        className="movies-card__link"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
+
       <div className="movies-card__info">
         <div className="movies-card__info-container">
           <h2 className="movies-card__title">{card.nameRU}</h2>
@@ -33,6 +28,12 @@ const MoviesCard = ({ card, flag }) => {
           type="button"
         ></button>
       </div>
+      <a
+        href="https://www.kinopoisk.ru/film/1302273/?utm_referrer=yandex.ru"
+        className="movies-card__link"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
       <img className="movies-card__image" src={card.image} alt={card.nameRU} />
       </a>
     </li>

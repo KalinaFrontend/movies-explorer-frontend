@@ -5,12 +5,14 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import ScrollMoviesBtn from "../ScrollMoviesBtn/ScrollMoviesBtn";
 
 const SavedMovies = ({ cards }) => {
+
+
   return (
     <main>
       <section className="saved-movies">
         <SearchForm />
         <MoviesCardList cards={cards} flag="delete-favorites-btn" />
-        <ScrollMoviesBtn />
+        <ScrollMoviesBtn cards={cards} />
       </section>
     </main>
   );

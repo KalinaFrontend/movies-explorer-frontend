@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Header from "../Header/Header";
@@ -12,9 +12,10 @@ import Login from "../Login/Login";
 import NotFindPage from '../NotFindPage/NotFindPage'
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { initialMoviesCards } from "../../utils/initialMoviesCards";
+import { savedMovies } from "../../utils/initialMoviesCards";
 
 function App() {
-  const [currentUser, setCurrentUser] = React.useState(null);
+  const [currentUser] = useState(null);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -48,7 +49,7 @@ function App() {
             element={
               <>
                 <Header auth={true} />
-                <SavedMovies cards={initialMoviesCards} />
+                <SavedMovies cards={savedMovies} />
                 <Footer />
               </>
             }
