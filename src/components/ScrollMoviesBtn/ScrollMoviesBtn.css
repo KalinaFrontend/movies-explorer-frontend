@@ -1,0 +1,63 @@
+.scroll-movies-btn {
+  margin: 0 auto 80px auto;
+  max-width: 1280px;
+  min-height: 50px;
+  display: flex;
+  justify-content: center;
+}
+
+.scroll-movies-btn_none {
+  margin: 0 auto 90px auto;
+}
+
+@media screen and (max-width: 768px) {
+  .scroll-movies-btn_none {
+    margin: 0 auto 120px auto;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .scroll-movies-btn_none {
+    margin: 0 auto 162px auto;
+  }
+}
+
+.scroll-movies-btn__button-none {
+  display: none;
+}
+
+.scroll-movies-btn__button {
+  margin-top: 50px;
+  margin-bottom: 0px;
+  padding: 0;
+  min-width: 320px;
+  min-height: 36px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+  text-align: center;
+  border: #e8e8e8 1px solid;
+  border-radius: 5px;
+  background-color: #fff;
+  color: #000;
+  cursor: pointer;
+}
+
+.scroll-movies-btn__button:hover {
+  transition: 1s ease-in;
+  opacity: 0.6;
+}
+
+@media screen and (max-width: 768px) {
+  .scroll-movies-btn__button {
+    margin-top: 80px;
+    margin-bottom: 0px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .scroll-movies-btn__button {
+    margin-bottom: 40px;
+    min-width: 240px;
+  }
+}

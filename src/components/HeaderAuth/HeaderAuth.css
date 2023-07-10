@@ -1,0 +1,75 @@
+.header-auth {
+  min-width: 221px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+@media screen and (max-width: 768px) {
+  .header-auth {
+    min-width: 183px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .header-auth {
+    min-width: 0px;
+  }
+}
+
+.header-auth__singup-button {
+  margin-right: 25px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  text-decoration: none;
+  cursor: pointer;
+  color: #000000;
+  background-color: white;
+  border: none;
+}
+
+.header-auth__singup-button:hover {
+  transition: 1s ease-in;
+  opacity: 0.5;
+}
+
+@media screen and (max-width: 480px) {
+  .header-auth__singup-button {
+    margin-right: 15px;
+    padding: 0 0 2px 0;
+    font-size: 10px;
+  }
+}
+
+.header-auth__entry-button {
+  margin: 21px 0px 21px 0;
+  min-width: 76px;
+  min-height: 32px;
+  padding: 0;
+  border: none;
+  border-radius: 3px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  text-align: center;
+  background-color: #3ddc84;
+  color: #000000;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.header-auth__entry-button:hover {
+  transition: 1s ease-in;
+  opacity: 0.6;
+}
+
+@media screen and (max-width: 480px) {
+  .header-auth__entry-button {
+    min-width: 53px;
+    min-height: 29px;
+    font-size: 10px;
+  }
+}
