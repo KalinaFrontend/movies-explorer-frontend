@@ -1,7 +1,7 @@
 import React from "react";
 import Authorization from "../Authorization/Authorization";
 
-function Register() {
+function Register(props) {
   return (
     <main>
       <Authorization
@@ -12,6 +12,7 @@ function Register() {
         link="Войти"
         linkRout="/signin"
         name={["name", "email", "password"]}
+        onLogin={props.onLogin}
       />
     </main>
   );

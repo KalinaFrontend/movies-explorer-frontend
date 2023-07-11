@@ -4,7 +4,7 @@ import arrow from "../../images/portfolio__link-arrow.svg";
 function Portfolio() {
   return (
     <>
-      <p className="portfolio__portfolio-link">Портфолио</p>
+      <h3 className="portfolio__portfolio-link">Портфолио</h3>
       <ul className="portfolio__navigation">
         <li>
           <a
