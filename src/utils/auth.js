@@ -8,14 +8,15 @@ const checkResponse = (res) => {
     }
   }
 
-export const authorization = ({ email, password }) => {
-    return fetch(`https://auth.nomoreparties.co/signin`, {
+export async function authorization ({ email, password }) {
+    const data = await fetch (`${baseUrl}/signin`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json" 
     },
       body: JSON.stringify({ password, email }),
-    }).then(checkResponse);
+    })
+    return checkResponse(data);
 }
 
 

@@ -11,6 +11,7 @@ import Register from "../Register/Register";
 import Login from "../Login/Login";
 import NotFindPage from "../NotFindPage/NotFindPage";
 import * as auth from "../../utils/auth";
+import * as api from "../../utils/api";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { initialMoviesCards } from "../../utils/initialMoviesCards";
 import { savedMovies } from "../../utils/initialMoviesCards";
@@ -18,12 +19,23 @@ import { savedMovies } from "../../utils/initialMoviesCards";
 function App() {
 
   const navigate = useNavigate();
-  const [currentUser] = useState(null);
+  const [currentUser, setCurrentUser] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false);
 
+  /*
   useEffect(() => {
     handleTokenCheck();
   }, []);
+*/
+
+  const getUserInfo = async () => {
+    try {
+      const userInfo = await api.getUserInfo();
+      setCurrentUser(userInfo.user);
+    } catch(e) {
+      console.warn(e);
+    }
+  }
 
   //Проверить токен
   const handleTokenCheck = async () => {
@@ -32,32 +44,20 @@ function App() {
       return;
     }
     try {
-//      const userInfo = await api.getUserInfo();
-//      setUserData(userInfo.user.email);
-      navigate("/");
+    const userInfo = await api.getUserInfo();
+    setCurrentUser(userInfo);
+    navigate("/movies");
     } catch(e) {
       console.warn(e);
     }
   }
 
-  /*function handleAuthorization(data) {
-    auth
-      .authorization(data)
-      .then((data) => {
-        if (data.token) {
-          localStorage.setItem("jwt", data.token);
-          setLoggedIn(true);
-          handleTokenCheck();
-        }
-      })
-      .catch(console.error);
-  }
-*/
+    //Авторизоваться
   const handleAuthorization = async(data) => {
     try {
       const userToken = await  auth.authorization(data);
       if(userToken) {
-        localStorage.getItem("jwt", userToken.token);
+        localStorage.setItem("jwt", userToken.token);
         setLoggedIn(true);
         handleTokenCheck();
       }
@@ -125,7 +125,7 @@ function App() {
             }
           />
           <Route exact path="/signup" element={<Register onLogin={handleRegistration}/>} />
-          <Route exact path="/signin" element={<Login />} />
+          <Route exact path="/signin" element={<Login onLogin={handleAuthorization}/>} />
           <Route exact path="/*" element={<NotFindPage />} />
         </Routes>
       </div>
