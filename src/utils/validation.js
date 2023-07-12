@@ -8,8 +8,10 @@ const Forms = (onLogin) => {
     useEffect(() => {
         setValues({});
         setErrors({});
-        setInactive(false)
+        setInactive(false);
       }, []);
+
+
     
       const handleChange = (event) => {
         const { name, value } = event.target;

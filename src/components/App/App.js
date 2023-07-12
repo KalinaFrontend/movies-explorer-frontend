@@ -17,17 +17,15 @@ import { initialMoviesCards } from "../../utils/initialMoviesCards";
 import { savedMovies } from "../../utils/initialMoviesCards";
 
 function App() {
-
   const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false);
 
-  /*
   useEffect(() => {
     handleTokenCheck();
   }, []);
-*/
 
+  /*
   const getUserInfo = async () => {
     try {
       const userInfo = await api.getUserInfo();
@@ -36,7 +34,7 @@ function App() {
       console.warn(e);
     }
   }
-
+*/
   //Проверить токен
   const handleTokenCheck = async () => {
     const jwt = localStorage.getItem("jwt");
@@ -44,38 +42,56 @@ function App() {
       return;
     }
     try {
-    const userInfo = await api.getUserInfo();
-    setCurrentUser(userInfo);
-    navigate("/movies");
-    } catch(e) {
+      const userInfo = await api.getUserInfo();
+      setCurrentUser(userInfo);
+    } catch (e) {
       console.warn(e);
     }
-  }
+  };
 
-    //Авторизоваться
-  const handleAuthorization = async(data) => {
+  //Авторизоваться
+  const handleAuthorization = async (data) => {
     try {
-      const userToken = await  auth.authorization(data);
-      if(userToken) {
+      const userToken = await auth.authorization(data);
+      if (userToken) {
         localStorage.setItem("jwt", userToken.token);
         setLoggedIn(true);
         handleTokenCheck();
       }
-    } catch(e) {
+    } catch (e) {
       console.warn(e);
     }
-  }
+  };
 
-    //Зарегистрироваться
-    const handleRegistration = async (data) => {
-      try {
-          await auth.registration(data);
-          navigate("/signin");
-      } catch (e) {
-          console.warn(e);
-      }
-  }
+  //Зарегистрироваться
+  const handleRegistration = async (data) => {
+    try {
+      await auth.registration(data);
+      navigate("/signin");
+    } catch (e) {
+      console.warn(e);
+    }
+  };
 
+  //Обновить данные пользователя
+  const handleUpdateUserInfo = async (data) => {
+    try {
+      if (!data.name)
+        data = {
+          ...data,
+          name: currentUser.name,
+        };
+      if (!data.email)
+        data = {
+          ...data,
+          email: currentUser.email,
+        };
+      const userData = await api.updateUserInfo(data);
+      setCurrentUser(userData);
+    } catch (e) {
+      console.warn(e);
+    }
+  };
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -120,12 +136,20 @@ function App() {
             element={
               <>
                 <Header auth={true} />
-                <Profile />
+                <Profile updateUser={handleUpdateUserInfo} />
               </>
             }
           />
-          <Route exact path="/signup" element={<Register onLogin={handleRegistration}/>} />
-          <Route exact path="/signin" element={<Login onLogin={handleAuthorization}/>} />
+          <Route
+            exact
+            path="/signup"
+            element={<Register onLogin={handleRegistration} />}
+          />
+          <Route
+            exact
+            path="/signin"
+            element={<Login onLogin={handleAuthorization} />}
+          />
           <Route exact path="/*" element={<NotFindPage />} />
         </Routes>
       </div>

@@ -19,3 +19,15 @@ export async function getUserInfo () {
    })
    return checkResponse(data);
 }
+
+export async function updateUserInfo(userInfo) {
+  const data = await fetch(`${baseUrl}/users/me`, {
+    method: "PATCH",
+    headers: {
+      authorization: `Bearer ${localStorage.getItem('jwt')}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(userInfo),
+  })
+  return checkResponse(data);
+}
