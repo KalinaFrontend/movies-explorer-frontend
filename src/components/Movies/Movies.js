@@ -6,11 +6,7 @@ import ScrollMoviesBtn from "../ScrollMoviesBtn/ScrollMoviesBtn";
 
 const Movies = (props) => {
   const [seachCards, setSeachcards] = useState(null);
-/*
-  useEffect(() => {
-    handleSeachCards();
-  }, []);
-*/
+
   const handleSeachCards = (line) => {
     line.toLowerCase();
     const findCard = [];
@@ -20,7 +16,6 @@ const Movies = (props) => {
       }
     });
     setSeachcards(findCard);
-    console.log(findCard);
   };
 
   return (

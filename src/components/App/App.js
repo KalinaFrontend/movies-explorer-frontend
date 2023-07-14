@@ -33,7 +33,6 @@ function App() {
     try {
       const data = await movies.getMovies();
       setCards(data);
-      console.log(data);
     } catch (e) {
       console.warn(e)
     }
