@@ -1,9 +1,21 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import "./SearchForm.css";
 import search from "../../images/search-form__search-button.svg";
 import searchBtn from "../../images/search__button-btn.svg";
 
-function SearchForm() {
+function SearchForm(props) {
+  const [searchTerm, setSearchTerm] = useState('')
+
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(() => {
+      props.onCard(searchTerm);
+    }, 3000)
+    return () => clearTimeout(delayDebounceFn)
+  }, [props, searchTerm])
+
+
+
+
   return (
     <section className="search">
     <form className="search__form">
@@ -19,6 +31,7 @@ function SearchForm() {
           minLength="2"
           maxLength="30" 
           type="text"
+          onChange ={(e) => setSearchTerm(e.target.value)}
           required
         />
         <button type="submit" className="search__button">

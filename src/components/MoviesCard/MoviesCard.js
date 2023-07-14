@@ -14,11 +14,12 @@ const MoviesCard = ({ card, flag }) => {
 
   return (
     <li className="movies-card__card">
-
       <div className="movies-card__info">
         <div className="movies-card__info-container">
           <h2 className="movies-card__title">{card.nameRU}</h2>
-          <p className="movies-card__time">{card.duration}</p>
+          <p className="movies-card__time">{`${Math.floor(
+            card.duration / 60
+          )}ч ${card.duration % 60}м`}</p>
         </div>
         <button
           className={`movies-card__${flag} movies-card__${flag}_${
@@ -29,12 +30,16 @@ const MoviesCard = ({ card, flag }) => {
         ></button>
       </div>
       <a
-        href="https://www.kinopoisk.ru/film/1302273/?utm_referrer=yandex.ru"
+        href={card.trailerLink}
         className="movies-card__link"
         target="_blank"
         rel="noopener noreferrer"
       >
-      <img className="movies-card__image" src={card.image} alt={card.nameRU} />
+        <img
+          className="movies-card__image"
+          src={`https://api.nomoreparties.co/${card.image.url}`}
+          alt={card.nameRU}
+        />
       </a>
     </li>
   );

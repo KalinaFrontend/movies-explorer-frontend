@@ -12,6 +12,7 @@ import Login from "../Login/Login";
 import NotFindPage from "../NotFindPage/NotFindPage";
 import * as auth from "../../utils/auth";
 import * as api from "../../utils/api";
+import * as movies from "../../utils/MoviesApi";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { initialMoviesCards } from "../../utils/initialMoviesCards";
 import { savedMovies } from "../../utils/initialMoviesCards";
@@ -19,11 +20,24 @@ import { savedMovies } from "../../utils/initialMoviesCards";
 function App() {
   const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState([]);
+  const [cards, setCards] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
     handleTokenCheck();
+    handleInitialMoviesCards();
   }, []);
+
+  //Получить список карточек
+  const handleInitialMoviesCards = async () => {
+    try {
+      const data = await movies.getMovies();
+      setCards(data);
+      console.log(data);
+    } catch (e) {
+      console.warn(e)
+    }
+  };
 
   /*
   const getUserInfo = async () => {
@@ -114,7 +128,7 @@ function App() {
             element={
               <>
                 <Header auth={true} />
-                <Movies cards={initialMoviesCards} />
+                <Movies cards={cards} />
                 <Footer />
               </>
             }
