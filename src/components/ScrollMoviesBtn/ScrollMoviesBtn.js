@@ -1,11 +1,11 @@
 import React from "react";
 import "./ScrollMoviesBtn.css";
 
-function ScrollMoviesBtn({ cards }) {
+function ScrollMoviesBtn({ cards, maxMovies, onClick }) {
 
   return (
-    <div className={ cards.length < 9 ? 'scroll-movies-btn scroll-movies-btn_none' : 'scroll-movies-btn'}>
-      <button className={ cards.length < 9 ? "scroll-movies-btn__button-none" : "scroll-movies-btn__button"} type="button">
+    <div className={ cards.length <= maxMovies ? 'scroll-movies-btn scroll-movies-btn_none' : 'scroll-movies-btn'}>
+      <button className={ cards.length <= maxMovies ? "scroll-movies-btn__button-none" : "scroll-movies-btn__button"} type="button" onClick={onClick}>
         Ещё
       </button>
     </div>

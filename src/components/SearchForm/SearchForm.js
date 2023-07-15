@@ -5,23 +5,37 @@ import searchBtn from "../../images/search__button-btn.svg";
 
 function SearchForm(props) {
   const [searchTerm, setSearchTerm] = useState("");
-  const [isStart, setIsStart] = useState(false);
+  const [checkbox, setCheckbox] = useState(false);
 
-  useEffect((e) => {
-    const delayDebounceFn = setTimeout(() => {
-      props.onCard(searchTerm);
-    }, 3000);
-    if(isStart) {
-      props.onCard(searchTerm);
-      setIsStart(false);
-      return () => clearTimeout(delayDebounceFn);
-    }
-    return () => clearTimeout(delayDebounceFn);
-  }, [props, searchTerm, isStart]);
+  /*
+  useEffect(
+    (e) => {
+      const delayRequest = setTimeout(() => {
+        props.onCard(searchTerm, checkbox);
+      }, 3000);
+      if (isStart) {
+        props.onCard(searchTerm, checkbox);
+        setIsStart(false);
+        return () => clearTimeout(delayRequest);
+      }
+      return () => clearTimeout(delayRequest);
+    },
+    [props, searchTerm, isStart, checkbox]
+  );
+  */
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log();
+    if (document.querySelector(".search__input").value.length === 0) {
+      return document.querySelector(".search__input").placeholder = "Введите сообщение для поиска"
+    };
+    props.onCard(searchTerm, checkbox);
   };
+
+  const handleCheckbox = () => {
+    setCheckbox(!checkbox);
+  }
 
   return (
     <section className="search">
@@ -29,7 +43,6 @@ function SearchForm(props) {
         className="search__form"
         onSubmit={(e) => {
           handleSubmit(e);
-          setIsStart(true);
         }}
       >
         <div className="search__container">
@@ -45,7 +58,6 @@ function SearchForm(props) {
             maxLength="30"
             type="text"
             onChange={(e) => setSearchTerm(e.target.value)}
-            required
           />
           <button type="submit" className="search__button">
             <img
@@ -57,7 +69,7 @@ function SearchForm(props) {
           <div className="search__border"></div>
           <div className="search__toggle">
             <label className="search__tumbler">
-              <input type="checkbox" className="search__checkbox" />
+              <input type="checkbox" className="search__checkbox" onChange={handleCheckbox}/>
               <span className="search__slider" />
             </label>
             <p className="search__films">Короткометражки</p>

@@ -25,29 +25,9 @@ function App() {
 
   useEffect(() => {
     handleTokenCheck();
-    handleInitialMoviesCards();
   }, []);
 
-  //Получить список карточек
-  const handleInitialMoviesCards = async () => {
-    try {
-      const data = await movies.getMovies();
-      setCards(data);
-    } catch (e) {
-      console.warn(e)
-    }
-  };
 
-  /*
-  const getUserInfo = async () => {
-    try {
-      const userInfo = await api.getUserInfo();
-      setCurrentUser(userInfo.user);
-    } catch(e) {
-      console.warn(e);
-    }
-  }
-*/
   //Проверить токен
   const handleTokenCheck = async () => {
     const jwt = localStorage.getItem("jwt");
@@ -127,7 +107,7 @@ function App() {
             element={
               <>
                 <Header auth={true} />
-                <Movies cards={cards} />
+                <Movies  />
                 <Footer />
               </>
             }

@@ -8,3 +8,11 @@
     max-width: 768px;
   }
 }
+
+.movies_not-find {
+    margin: 50px auto;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 18px;
+    text-align: center;
+}

@@ -3,30 +3,66 @@ import "./Movies.css";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import ScrollMoviesBtn from "../ScrollMoviesBtn/ScrollMoviesBtn";
+import Preloader from "../Preloader/Preloader";
+import * as moviesApi from "../../utils/MoviesApi";
+import { seachCards } from "../../utils/searchMovies";
 
 const Movies = (props) => {
-  const [seachCards, setSeachcards] = useState(null);
+  const [movies, setMovies] = useState([]);
+  const [isLoading, setIsLoading] = useState(false); // состояние загрузки фильмов из базы
+  const [notFind, setNotFind] = useState(false); // ошибка запроса
 
-  const handleSeachCards = (line) => {
-    line.toLowerCase();
-    const findCard = [];
-    props.cards.forEach((item) => {
-      if (item.nameRU.toLowerCase().includes(line) || item.nameEN.toLowerCase().includes(line)) {
-        findCard.push(item);
+  /*
+
+  useEffect(() => {
+    const savedMovies = JSON.parse(localStorage.getItem('savedMovies'));
+    setMovies(savedMovies);
+    /*
+    if (savedMovies.length === 0) {
+      setIsLoading(true);
+      const data = handleInitialMoviesCards();
+      console.log(data);
+      };
+*/
+  /*
+      const data = props.getMovies;
+      console.log(data);
+          if (data) {
+            localStorage.setItem('savedMovies', JSON.stringify(movies));
+          }
+          setIsLoading(false);
+          
+
+  }, []);
+*/
+  const handleSeachCards = async (line, checkbox) => {
+    try {
+      setIsLoading(true);
+      setNotFind(false);
+      const data = await moviesApi.getMovies();
+      const findMovies = seachCards(data, line, checkbox);
+      if (findMovies.length === 0) {
+        setNotFind(true);
+      } else {
+        setNotFind(false);
       }
-    });
-    setSeachcards(findCard);
+      setMovies(findMovies);
+      setIsLoading(false);
+    } catch (e) {
+      console.warn(e);
+    }
   };
 
   return (
     <main className="content">
       <div className="movies">
-        <SearchForm onCard={handleSeachCards}/>
-        <MoviesCardList
-          cards={seachCards ? seachCards : props.cards}
-          flag="add-favorites-btn"
-        />
-        <ScrollMoviesBtn cards={props.cards} />
+        <SearchForm onCard={handleSeachCards} />
+        {notFind && <p className="movies_not-find">Ничего не найдено</p>}
+        {isLoading ? (
+          <Preloader />
+        ) : (
+          <MoviesCardList cards={movies} flag="add-favorites-btn" />
+        )}
       </div>
     </main>
   );
