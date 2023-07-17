@@ -65,6 +65,16 @@ export async function saveMovie({ country, director, duration, year, description
       movieId: id 
     }),
   });
-  console.log(data);
   return checkResponse(data);
+}
+
+export async function deleteMovies( movieId ) {
+  const data = await fetch(`${baseUrl}/movies/${movieId} `, {
+    method: "DELETE",
+    headers: {
+      authorization: `Bearer ${localStorage.getItem('jwt')}`,
+      "Content-Type": "application/json",
+    },
+  })
+  return checkResponse(data)
 }

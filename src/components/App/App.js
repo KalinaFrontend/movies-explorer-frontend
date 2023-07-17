@@ -97,6 +97,7 @@ function App() {
 
    //Сохранить фильм
    const handleSaveMovies= async (data) => {
+    console.log(data);
     try {
       await api.saveMovie(data);
       handleSaveMovie();
@@ -104,6 +105,19 @@ function App() {
       console.warn(e);
     }
   };
+
+     //Удалить фильм
+     const handleDeleteMovies= async (data) => {
+      try {
+        const maessage = await api.deleteMovies(data);
+        console.log(maessage);
+        handleSaveMovie();
+      } catch (e) {
+        console.warn(e);
+      }
+    };
+
+   
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -137,7 +151,7 @@ function App() {
             element={
               <>
                 <Header auth={true} />
-                <SavedMovies savedMovies={savedMovies}/>
+                <SavedMovies savedMovies={savedMovies} onDelete={handleDeleteMovies} />
                 <Footer />
               </>
             }

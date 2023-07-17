@@ -8,19 +8,19 @@ const MoviesCard = ({ card, flag, savedMovies, onSave }) => {
   useEffect(() => {
     if (savedMovies) {
       savedMovies.forEach((movies) => {
-        if (movies.movieId === card.id) {
+        if (movies.movieId === card.id || movies.id === card.id ) {
           setSaveMovie(true);
         }
       });
     }
-  }, []);
+  }, [saveMovie]);
 
   const handleSaveMovie = () => {
     if (!saveMovie && flag === "add-favorites-btn") {
-      console.log(card);
       onSave(card);
       return setSaveMovie(true);
     }
+    onSave(card._id);
     return setSaveMovie(false);
   };
 
@@ -49,7 +49,7 @@ const MoviesCard = ({ card, flag, savedMovies, onSave }) => {
       >
         <img
           className="movies-card__image"
-          src={`https://api.nomoreparties.co/${card.image.url}`}
+          src={(!saveMovie) ? `https://api.nomoreparties.co/${card.image.url}`: card.image}
           alt={card.nameRU}
         />
       </a>
@@ -57,6 +57,5 @@ const MoviesCard = ({ card, flag, savedMovies, onSave }) => {
   );
 };
 
-//      <button className={`movies-card__add-favorites-btn movies-card__add-favorites-btn_${saveMovie ? "active" : ""}`} onClick={handleSaveMovie} type="button"></button>
 
 export default MoviesCard;
