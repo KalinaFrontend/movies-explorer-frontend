@@ -79,13 +79,19 @@ function Authorization(props) {
                 : "authorization__confirm-button authorization__confirm-button-login"
             }
             ${
-              (errors.name ||
-                errors.email ||
-                errors.password ||
-                values.name === undefined ||
-                values.email === undefined ||
-                values.password === undefined) &&
-              "authorization__confirm-button_disable"
+              props.authType === "register"
+                ? (errors.name ||
+                    errors.email ||
+                    errors.password ||
+                    values.name === undefined ||
+                    values.email === undefined ||
+                    values.password === undefined) &&
+                  "authorization__confirm-button_disable"
+                : ( errors.email ||
+                    errors.password ||
+                    values.email === undefined ||
+                    values.password === undefined) &&
+                  "authorization__confirm-button_disable"
             }`}
             type="submit"
           >

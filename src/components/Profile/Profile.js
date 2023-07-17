@@ -54,7 +54,7 @@ function Profile(props) {
             Редактировать
           </button>
         </form>
-        <button className="profile__btn profile__btn_type_logout" type="button" onClick={()=>navigate('/')}>
+        <button className="profile__btn profile__btn_type_logout" type="button" onClick={props.onLogin}>
           Выйти из аккаунта
         </button>
       </section>

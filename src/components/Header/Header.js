@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Header.css'
 import Logo from "../Logo/Logo";
 import HeaderAuth from "../HeaderAuth/HeaderAuth";
@@ -8,10 +8,9 @@ import NavProfileBtn from "../NavProfileBtn/NavProfileBtn";
 
 const Header = ({auth}) => {
 
-  const [isOpen, setIsOpen] = React.useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   function handleClickOpen () {
-    console.log('тут');
     setIsOpen(true)
   }
 

@@ -12,7 +12,7 @@ import Login from "../Login/Login";
 import NotFindPage from "../NotFindPage/NotFindPage";
 import * as auth from "../../utils/auth";
 import * as api from "../../utils/mainApi";
-import * as movies from "../../utils/MoviesApi";
+import ProtectedRoute from "../ProtectedRoute";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 function App() {
@@ -21,17 +21,17 @@ function App() {
   const [savedMovies, setSavedMovies] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false);
 
+
   useEffect(() => {
     handleTokenCheck();
     handleSaveMovie();
-  }, []);
+  }, [loggedIn]);
 
   //Получить список сохраненных фильмов
   const handleSaveMovie = async () => {
     try {
       const data = await api.getMovies();
       setSavedMovies(data);
-      console.log(data);
     } catch (e) {
       console.warn(e);
     }
@@ -39,11 +39,14 @@ function App() {
 
   //Проверить токен
   const handleTokenCheck = async () => {
+
     const jwt = localStorage.getItem("jwt");
+    console.log(jwt)
     if (!jwt) {
       return;
     }
     try {
+      setLoggedIn(true);
       const userInfo = await api.getUserInfo();
       setCurrentUser(userInfo);
     } catch (e) {
@@ -58,7 +61,8 @@ function App() {
       if (userToken) {
         localStorage.setItem("jwt", userToken.token);
         setLoggedIn(true);
-        handleTokenCheck();
+        await handleTokenCheck();
+        navigate("/");
       }
     } catch (e) {
       console.warn(e);
@@ -95,11 +99,9 @@ function App() {
     }
   };
 
-   //Сохранить фильм
-   const handleSaveMovies= async (data) => {
-    console.log(data);
+  //Сохранить фильм
+  const handleSaveMovies = async (data) => {
     try {
-      console.log(savedMovies.includes(data.nameRU));
       const maessage = await api.saveMovie(data);
       console.log(maessage);
       await handleSaveMovie();
@@ -108,18 +110,23 @@ function App() {
     }
   };
 
-     //Удалить фильм
-     const handleDeleteMovies= async (data) => {
-      try {
-        const maessage = await api.deleteMovies(data);
-        console.log(maessage);
-        await handleSaveMovie();
-      } catch (e) {
-        console.warn(e);
-      }
-    };
+  //Удалить фильм
+  const handleDeleteMovies = async (data) => {
+    try {
+      const maessage = await api.deleteMovies(data);
+      console.log(maessage);
+      await handleSaveMovie();
+    } catch (e) {
+      console.warn(e);
+    }
+  };
 
-   
+  //Выйти из аккаунта
+  const handleLoginOut = () => {
+    setLoggedIn(false);
+    localStorage.removeItem("jwt");
+    navigate("/");
+  };
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -130,41 +137,9 @@ function App() {
             path="/"
             element={
               <>
-                <Header auth={false} />
+                <Header auth={loggedIn} />
                 <Main />
                 <Footer />
-              </>
-            }
-          />
-          <Route
-            exact
-            path="/movies"
-            element={
-              <>
-                <Header auth={true} />
-                <Movies  savedMovies={savedMovies} onSave={handleSaveMovies} onDelete={handleDeleteMovies}/>
-                <Footer />
-              </>
-            }
-          />
-          <Route
-            exact
-            path="/saved-movies"
-            element={
-              <>
-                <Header auth={true} />
-                <SavedMovies savedMovies={savedMovies} onSave={handleSaveMovies} onDelete={handleDeleteMovies} />
-                <Footer />
-              </>
-            }
-          />
-          <Route
-            exact
-            path="/profile"
-            element={
-              <>
-                <Header auth={true} />
-                <Profile updateUser={handleUpdateUserInfo} />
               </>
             }
           />
@@ -177,6 +152,59 @@ function App() {
             exact
             path="/signin"
             element={<Login onLogin={handleAuthorization} />}
+          />
+
+          <Route
+            exact
+            path="/movies"
+            element={
+              <>
+                <Header auth={loggedIn} />
+                <ProtectedRoute
+                  element={Movies}
+                  loggedIn={loggedIn}
+                  handleTokenCheck={handleTokenCheck}
+                  savedMovies={savedMovies}
+                  onSave={handleSaveMovies}
+                  onDelete={handleDeleteMovies}
+                />
+                <Footer />
+              </>
+            }
+          />
+          <Route
+            exact
+            path="/saved-movies"
+            element={
+              <>
+                <Header auth={loggedIn} />
+                <ProtectedRoute
+                  element={SavedMovies}
+                  loggedIn={loggedIn}
+                  handleTokenCheck={handleTokenCheck}
+                  savedMovies={savedMovies}
+                  onSave={handleSaveMovies}
+                  onDelete={handleDeleteMovies}
+                />
+                <Footer />
+              </>
+            }
+          />
+          <Route
+            exact
+            path="/profile"
+            element={
+              <>
+                <Header auth={loggedIn} />
+                <ProtectedRoute
+                  element={Profile}
+                  loggedIn={loggedIn}
+                  handleTokenCheck={handleTokenCheck}
+                  updateUser={handleUpdateUserInfo}
+                  onLogin={handleLoginOut}
+                />
+              </>
+            }
           />
           <Route exact path="/*" element={<NotFindPage />} />
         </Routes>

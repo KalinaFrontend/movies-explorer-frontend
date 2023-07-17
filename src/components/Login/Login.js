@@ -1,15 +1,8 @@
-import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React from "react";
 import Authorization from "../Authorization/Authorization";
 
 function Login(props) {
-  const navigate = useNavigate();
 
-  useEffect (() => {
-    if(localStorage.getItem("jwt")) {
-      navigate("/movies")
-    }
-  })
 
   return (
     <main>
