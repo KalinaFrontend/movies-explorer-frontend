@@ -7,7 +7,7 @@ import * as moviesApi from "../../utils/MoviesApi";
 import { seachCards } from "../../utils/searchMovies";
 import { saveMovie } from "../../utils/mainApi";
 
-const SavedMovies = ({ savedMovies, onDelete }) => {
+const SavedMovies = ({ savedMovies, onSave, onDelete }) => {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false); // состояние загрузки фильмов из базы
   const [notFind, setNotFind] = useState(false); // ошибка запроса
@@ -38,7 +38,7 @@ const SavedMovies = ({ savedMovies, onDelete }) => {
         {isLoading ? (
           <Preloader />
         ) : (
-          <MoviesCardList cards={savedMovies} flag="delete-favorites-btn" savedMovies={savedMovies} onSave={onDelete} />
+          <MoviesCardList cards={savedMovies} flag="delete-favorites-btn" savedMovies={savedMovies} onSave={onSave} onDelete={onDelete}/>
         )}
       </section>
     </main>

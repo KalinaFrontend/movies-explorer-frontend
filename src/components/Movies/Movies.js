@@ -61,7 +61,7 @@ const Movies = (props) => {
         {isLoading ? (
           <Preloader />
         ) : (
-          <MoviesCardList cards={movies} flag="add-favorites-btn"  savedMovies={props.savedMovies} onSave={props.onSave} />
+          <MoviesCardList cards={movies} flag="add-favorites-btn"  savedMovies={props.savedMovies} onSave={props.onSave} onDelete={props.onDelete} />
         )}
       </div>
     </main>

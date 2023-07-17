@@ -99,8 +99,10 @@ function App() {
    const handleSaveMovies= async (data) => {
     console.log(data);
     try {
-      await api.saveMovie(data);
-      handleSaveMovie();
+      console.log(savedMovies.includes(data.nameRU));
+      const maessage = await api.saveMovie(data);
+      console.log(maessage);
+      await handleSaveMovie();
     } catch (e) {
       console.warn(e);
     }
@@ -111,7 +113,7 @@ function App() {
       try {
         const maessage = await api.deleteMovies(data);
         console.log(maessage);
-        handleSaveMovie();
+        await handleSaveMovie();
       } catch (e) {
         console.warn(e);
       }
@@ -140,7 +142,7 @@ function App() {
             element={
               <>
                 <Header auth={true} />
-                <Movies  savedMovies={savedMovies} onSave={handleSaveMovies}/>
+                <Movies  savedMovies={savedMovies} onSave={handleSaveMovies} onDelete={handleDeleteMovies}/>
                 <Footer />
               </>
             }
@@ -151,7 +153,7 @@ function App() {
             element={
               <>
                 <Header auth={true} />
-                <SavedMovies savedMovies={savedMovies} onDelete={handleDeleteMovies} />
+                <SavedMovies savedMovies={savedMovies} onSave={handleSaveMovies} onDelete={handleDeleteMovies} />
                 <Footer />
               </>
             }

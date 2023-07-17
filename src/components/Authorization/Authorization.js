@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Authorization.css";
 import Logo from "../Logo/Logo";
 import Forms from "../../utils/validation";
@@ -72,23 +72,32 @@ function Authorization(props) {
           <p className="authorization__validation-text">{errors.password}</p>
         </ul>
         <div className="authorization__confirm">
-        <button
-          className={`${
-            props.authType === "register"
-              ? "authorization__confirm-button"
-              : "authorization__confirm-button authorization__confirm-button-login"
-          }`}
-          type="submit"
-        >
-          {props.button}
-        </button>
-        <div className="authorization__confirm-container">
-          <p className="authorization__confirm-text">{props.text}</p>
-          <a className="authorization__confirm-link" href={props.linkRout}>
-            {props.link}
-          </a>
+          <button
+            className={`${
+              props.authType === "register"
+                ? "authorization__confirm-button"
+                : "authorization__confirm-button authorization__confirm-button-login"
+            }
+            ${
+              (errors.name ||
+                errors.email ||
+                errors.password ||
+                values.name === undefined ||
+                values.email === undefined ||
+                values.password === undefined) &&
+              "authorization__confirm-button_disable"
+            }`}
+            type="submit"
+          >
+            {props.button}
+          </button>
+          <div className="authorization__confirm-container">
+            <p className="authorization__confirm-text">{props.text}</p>
+            <a className="authorization__confirm-link" href={props.linkRout}>
+              {props.link}
+            </a>
+          </div>
         </div>
-      </div>
       </form>
     </section>
   );

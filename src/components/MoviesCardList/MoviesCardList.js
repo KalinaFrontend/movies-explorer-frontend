@@ -1,7 +1,6 @@
 import React from "react";
 import { useState, useEffect } from 'react';
 import "./MoviesCardList.css";
-import { useLocation } from 'react-router-dom';
 import MoviesCard from "../MoviesCard/MoviesCard";
 import ScrollMoviesBtn from "../ScrollMoviesBtn/ScrollMoviesBtn";
 import {
@@ -15,10 +14,9 @@ import {
 
 
 
-const MoviesCardList = ({ cards, flag, savedMovies, onSave }) => {
+const MoviesCardList = ({ cards, flag, savedMovies, onSave, onDelete }) => {
   const [maxMovies, setMaxMovies] = useState(0); //
   const [step, setStep] = useState(0);
-  const location = useLocation();
 
 
     // обработчик кнопки Еще
@@ -57,7 +55,7 @@ const MoviesCardList = ({ cards, flag, savedMovies, onSave }) => {
         {cards.map((card, index) => {
             if (index < maxMovies) {
               return (
-                <MoviesCard  key={card.id || card.movieId} card={card}  flag={flag}  savedMovies={savedMovies} onSave={onSave} />
+                <MoviesCard  key={card.id || card.movieId} card={card}  flag={flag}  savedMovies={savedMovies} onSave={onSave} onDelete={onDelete} />
               );
             }
             return null;

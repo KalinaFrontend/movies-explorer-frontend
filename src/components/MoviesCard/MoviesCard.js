@@ -2,25 +2,27 @@ import React from "react";
 import { useState, useEffect } from "react";
 import "./MoviesCard.css";
 
-const MoviesCard = ({ card, flag, savedMovies, onSave }) => {
+const MoviesCard = ({ card, flag, savedMovies, onSave, onDelete }) => {
   const [saveMovie, setSaveMovie] = useState(false);
+  const [moviesId, setMoviesId] = useState(null);
 
   useEffect(() => {
     if (savedMovies) {
       savedMovies.forEach((movies) => {
-        if (movies.movieId === card.id || movies.id === card.id ) {
+        if (movies.movieId === card.id || movies.id === card.id) {
+          setMoviesId(movies._id);
           setSaveMovie(true);
         }
       });
     }
   }, [saveMovie]);
 
-  const handleSaveMovie = () => {
+  const handleSaveMovie = async() => {
     if (!saveMovie && flag === "add-favorites-btn") {
-      onSave(card);
+      await onSave(card);
       return setSaveMovie(true);
     }
-    onSave(card._id);
+    await onDelete(moviesId);
     return setSaveMovie(false);
   };
 
@@ -49,13 +51,16 @@ const MoviesCard = ({ card, flag, savedMovies, onSave }) => {
       >
         <img
           className="movies-card__image"
-          src={(!saveMovie) ? `https://api.nomoreparties.co/${card.image.url}`: card.image}
+          src={
+            card.image.url
+              ? `https://api.nomoreparties.co/${card.image.url}`
+              : card.image
+          }
           alt={card.nameRU}
         />
       </a>
     </li>
   );
 };
-
 
 export default MoviesCard;
