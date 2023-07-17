@@ -1,5 +1,6 @@
 export const baseUrl = "http://api.kalina.movies-api.nomoredomains.monster";
 export const moviesUrl = " https://api.nomoreparties.co/beatfilm-movies";
+export const moviesApi = " https://api.nomoreparties.co/";
 
 export const MAX_MOVIES_1280 = 12;
 export const MAX_MOVIES_768 = 8;

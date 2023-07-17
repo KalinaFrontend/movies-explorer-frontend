@@ -11,22 +11,31 @@ import Register from "../Register/Register";
 import Login from "../Login/Login";
 import NotFindPage from "../NotFindPage/NotFindPage";
 import * as auth from "../../utils/auth";
-import * as api from "../../utils/api";
+import * as api from "../../utils/mainApi";
 import * as movies from "../../utils/MoviesApi";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
-import { initialMoviesCards } from "../../utils/initialMoviesCards";
-import { savedMovies } from "../../utils/initialMoviesCards";
 
 function App() {
   const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState([]);
-  const [cards, setCards] = useState([]);
+  const [savedMovies, setSavedMovies] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
     handleTokenCheck();
+    handleSaveMovie();
   }, []);
 
+  //Получить список сохраненных фильмов
+  const handleSaveMovie = async () => {
+    try {
+      const data = await api.getMovies();
+      setSavedMovies(data);
+      console.log(data);
+    } catch (e) {
+      console.warn(e);
+    }
+  };
 
   //Проверить токен
   const handleTokenCheck = async () => {
@@ -86,6 +95,16 @@ function App() {
     }
   };
 
+   //Сохранить фильм
+   const handleSaveMovies= async (data) => {
+    try {
+      await api.saveMovie(data);
+      handleSaveMovie();
+    } catch (e) {
+      console.warn(e);
+    }
+  };
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
@@ -107,7 +126,7 @@ function App() {
             element={
               <>
                 <Header auth={true} />
-                <Movies  />
+                <Movies  savedMovies={savedMovies} onSave={handleSaveMovies}/>
                 <Footer />
               </>
             }
@@ -118,7 +137,7 @@ function App() {
             element={
               <>
                 <Header auth={true} />
-                <SavedMovies cards={savedMovies} />
+                <SavedMovies savedMovies={savedMovies}/>
                 <Footer />
               </>
             }

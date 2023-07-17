@@ -1,12 +1,24 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./MoviesCard.css";
 
-const MoviesCard = ({ card, flag }) => {
+const MoviesCard = ({ card, flag, savedMovies, onSave }) => {
   const [saveMovie, setSaveMovie] = useState(false);
+
+  useEffect(() => {
+    if (savedMovies) {
+      savedMovies.forEach((movies) => {
+        if (movies.movieId === card.id) {
+          setSaveMovie(true);
+        }
+      });
+    }
+  }, []);
 
   const handleSaveMovie = () => {
     if (!saveMovie && flag === "add-favorites-btn") {
+      console.log(card);
+      onSave(card);
       return setSaveMovie(true);
     }
     return setSaveMovie(false);
@@ -22,7 +34,7 @@ const MoviesCard = ({ card, flag }) => {
           )}ч ${card.duration % 60}м`}</p>
         </div>
         <button
-          className={`movies-card__${flag} movies-card__${flag}_${
+          className={`movies-card__add-favorites-btn movies-card__add-favorites-btn_${
             saveMovie ? "active" : ""
           }`}
           onClick={handleSaveMovie}
@@ -44,5 +56,7 @@ const MoviesCard = ({ card, flag }) => {
     </li>
   );
 };
+
+//      <button className={`movies-card__add-favorites-btn movies-card__add-favorites-btn_${saveMovie ? "active" : ""}`} onClick={handleSaveMovie} type="button"></button>
 
 export default MoviesCard;

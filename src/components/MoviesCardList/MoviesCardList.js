@@ -15,7 +15,7 @@ import {
 
 
 
-const MoviesCardList = ({ cards, flag }) => {
+const MoviesCardList = ({ cards, flag, savedMovies, onSave }) => {
   const [maxMovies, setMaxMovies] = useState(0); //
   const [step, setStep] = useState(0);
   const location = useLocation();
@@ -57,13 +57,13 @@ const MoviesCardList = ({ cards, flag }) => {
         {cards.map((card, index) => {
             if (index < maxMovies) {
               return (
-                <MoviesCard key={card.id || card.movieId} card={card}  flag={flag} />
+                <MoviesCard  key={card.id || card.movieId} card={card}  flag={flag}  savedMovies={savedMovies} onSave={onSave}/>
               );
             }
             return null;
           })}
       </ul>
-      <ScrollMoviesBtn cards={cards} maxMovies={maxMovies} onClick={showMoreMovies}/>
+      <ScrollMoviesBtn cards={cards} maxMovies={maxMovies} onClick={showMoreMovies} />
     </section>
   );
 };
