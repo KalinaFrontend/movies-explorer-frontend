@@ -5,15 +5,19 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Preloader from "../Preloader/Preloader";
 import * as moviesApi from "../../utils/MoviesApi";
 import { seachCards } from "../../utils/searchMovies";
+import SearchError from "../SearchError/SearchError";
+import SearchErrorServer from "../SearchErrorServer/SearchErrorServer";
 
 const Movies = (props) => {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false); // состояние загрузки фильмов из базы
-  const [notFind, setNotFind] = useState(false); // ошибка запроса
+  const [notFind, setNotFind] = useState(false); // пользователь не найден
+  const [requestEror, setRequestEror] = useState(false); // ошибка запроса
 
   const handleSeachCards = async (line, checkbox) => {
     try {
       setIsLoading(true);
+      setRequestEror(false);
       setNotFind(false);
       const data = await moviesApi.getMovies();
       const findMovies = seachCards(data, line, checkbox);
@@ -25,6 +29,7 @@ const Movies = (props) => {
       setMovies(findMovies);
       setIsLoading(false);
     } catch (e) {
+      setRequestEror(true);
       console.warn(e);
     }
   };
@@ -33,7 +38,8 @@ const Movies = (props) => {
     <main className="content">
       <div className="movies">
         <SearchForm onCard={handleSeachCards} />
-        {notFind && <p className="movies_not-find">Ничего не найдено</p>}
+        {notFind && <SearchError />}
+        {requestEror && <SearchErrorServer />}
         {isLoading ? (
           <Preloader />
         ) : (

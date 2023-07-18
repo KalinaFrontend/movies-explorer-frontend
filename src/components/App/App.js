@@ -41,7 +41,6 @@ function App() {
   const handleTokenCheck = async () => {
 
     const jwt = localStorage.getItem("jwt");
-    console.log(jwt)
     if (!jwt) {
       return;
     }

@@ -3,18 +3,24 @@ import "./SavedMovies.css";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Preloader from "../Preloader/Preloader";
-import * as moviesApi from "../../utils/MoviesApi";
 import { seachCards } from "../../utils/searchMovies";
-import { saveMovie } from "../../utils/mainApi";
+import SearchError from "../SearchError/SearchError";
+import SearchErrorServer from "../SearchErrorServer/SearchErrorServer";
 
 const SavedMovies = ({ savedMovies, onSave, onDelete }) => {
-  const [movies, setMovies] = useState([]);
+  const [movies, setMovies] = useState([]); // сохранение фильмов для поиска
   const [isLoading, setIsLoading] = useState(false); // состояние загрузки фильмов из базы
-  const [notFind, setNotFind] = useState(false); // ошибка запроса
+  const [notFind, setNotFind] = useState(false); // пользователь не найден
+  const [requestEror, setRequestEror] = useState(false); // ошибка запроса 
+
+  useEffect(()=> {
+    setMovies(savedMovies);
+  }, [savedMovies])
 
   const handleSeachCards = async (line, checkbox) => {
     try {
       setIsLoading(true);
+      setRequestEror(false);
       setNotFind(false);
       const findMovies = seachCards(savedMovies, line, checkbox);
       if (findMovies.length === 0) {
@@ -25,20 +31,22 @@ const SavedMovies = ({ savedMovies, onSave, onDelete }) => {
       setMovies(findMovies);
       setIsLoading(false);
     } catch (e) {
+      setRequestEror(true);
       console.warn(e);
     }
   };
 
 
   return (
-    <main>
+    <main className="content">
       <section className="saved-movies">
-        <SearchForm onCard={handleSeachCards} />
-        {notFind && <p className="movies_not-find">Ничего не найдено</p>}
+        <SearchForm onCard={handleSeachCards} tag="saved-movies"/>
+        {notFind && <SearchError />}
+        {requestEror && <SearchErrorServer />}
         {isLoading ? (
           <Preloader />
         ) : (
-          <MoviesCardList cards={savedMovies} flag="delete-favorites-btn" savedMovies={savedMovies} onSave={onSave} onDelete={onDelete}/>
+          <MoviesCardList cards={movies} flag="delete-favorites-btn" savedMovies={savedMovies} onSave={onSave} onDelete={onDelete}/>
         )}
       </section>
     </main>

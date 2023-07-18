@@ -4,13 +4,12 @@ import "./MoviesCard.css";
 
 const MoviesCard = ({ card, flag, savedMovies, onSave, onDelete }) => {
   const [saveMovie, setSaveMovie] = useState(false);
-  const [moviesId, setMoviesId] = useState(null);
 
   useEffect(() => {
     if (savedMovies) {
       savedMovies.forEach((movies) => {
         if (movies.movieId === card.id || movies.id === card.id) {
-          setMoviesId(movies._id);
+
           setSaveMovie(true);
         }
       });
@@ -22,7 +21,7 @@ const MoviesCard = ({ card, flag, savedMovies, onSave, onDelete }) => {
       await onSave(card);
       return setSaveMovie(true);
     }
-    await onDelete(moviesId);
+    await onDelete(card._id);
     return setSaveMovie(false);
   };
 
@@ -36,7 +35,7 @@ const MoviesCard = ({ card, flag, savedMovies, onSave, onDelete }) => {
           )}ч ${card.duration % 60}м`}</p>
         </div>
         <button
-          className={`movies-card__add-favorites-btn movies-card__add-favorites-btn_${
+          className={`movies-card__${flag} movies-card__${flag}_${
             saveMovie ? "active" : ""
           }`}
           onClick={handleSaveMovie}

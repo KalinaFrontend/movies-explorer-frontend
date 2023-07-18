@@ -8,6 +8,7 @@ function SearchForm(props) {
   const [checkbox, setCheckbox] = useState(false);
 
   /*
+  // авто поиск через 3сек после ввода
   useEffect(
     (e) => {
       const delayRequest = setTimeout(() => {
@@ -26,7 +27,9 @@ function SearchForm(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log();
+    if (props.tag) {
+      return props.onCard(searchTerm, checkbox);
+    };
     if (document.querySelector(".search__input").value.length === 0) {
       return document.querySelector(".search__input").placeholder = "Введите сообщение для поиска"
     };

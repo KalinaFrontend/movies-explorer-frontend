@@ -81,7 +81,7 @@
   transition: 1.5s;
 }
 
-.movies-card__delete-favorites-btn {
+.movies-card__delete-favorites-btn_active {
   margin: 0;
   min-width: 30px;
   min-height: 30px;
