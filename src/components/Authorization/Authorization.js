@@ -64,12 +64,13 @@ function Authorization(props) {
               name="password"
               minLength="2"
               maxLength="30"
+              pattern="^(?=\S*[a-z])(?=\S*[A-Z])(?=\S*\d)(?=\S*[^\w\s])\S{8,}$"
               value={values.password || ""}
               onChange={handleChange}
               required
             />
           </li>
-          <p className="authorization__validation-text">{errors.password}</p>
+          <p className="authorization__validation-text">{errors.password && "Пароль должен содержать одну цифру от 1 до 9, одну строчную букву, одну заглавную букву, один специальный символ, без пробела и должен состоять из 8-16 символов."}</p>
         </ul>
         <div className="authorization__confirm">
           <button

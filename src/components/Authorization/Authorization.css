@@ -137,7 +137,15 @@
 
 .authorization__validation-text:last-of-type {
     margin-bottom: 0;
+    min-height: 36px;
 }
+
+@media screen and (max-width: 480px) {
+    .authorization__validation-text:last-of-type {
+        min-height: 48px;
+    }
+}
+
 
 .authorization__confirm {
     margin: 0 auto 0 auto;
