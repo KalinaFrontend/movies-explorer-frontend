@@ -1,4 +1,4 @@
-export const baseUrl = "http://api.kalina.movies-api.nomoredomains.monster";
+export const baseUrl = "https://api.kalina.movies-api.nomoredomains.monster";
 export const moviesUrl = " https://api.nomoreparties.co/beatfilm-movies";
 export const moviesApi = " https://api.nomoreparties.co/";
 
