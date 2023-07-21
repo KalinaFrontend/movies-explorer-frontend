@@ -6,7 +6,7 @@ import searchBtn from "../../images/search__button-btn.svg";
 function SearchForm(props) {
   const [searchTerm, setSearchTerm] = useState("");
   const [checkbox, setCheckbox] = useState(false);
-
+  const [render, setRender] = useState(false);
   /*
   // авто поиск через 3сек после ввода
   useEffect(
@@ -25,22 +25,41 @@ function SearchForm(props) {
   );
   */
 
+  useEffect(() => {
+    const checked = JSON.parse(localStorage.getItem("checkbox"));
+    if (checked === true) {
+      setCheckbox(true);
+      setRender(true);
+      //   document.getElementById("seachCheckbox").checked = true;
+    }
+    setRender(true);
+  }, []);
+
+  /*
+  // проверить состояние чекбокса
+  const checkСheckbox = () => {
+      setCheckbox(!checkbox);
+  };
+  */
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (props.tag) {
       return props.onCard(searchTerm, checkbox);
-    };
+    }
     if (document.querySelector(".search__input").value.length === 0) {
-      return document.querySelector(".search__input").placeholder = "Введите сообщение для поиска"
-    };
+      return (document.querySelector(".search__input").placeholder =
+        "Введите сообщение для поиска");
+    }
     props.onCard(searchTerm, checkbox);
   };
 
   const handleCheckbox = () => {
     setCheckbox(!checkbox);
-  }
+    localStorage.setItem("checkbox", JSON.stringify(!checkbox));
+  };
 
-  return (
+   return render &&(
     <section className="search">
       <form
         className="search__form"
@@ -72,7 +91,13 @@ function SearchForm(props) {
           <div className="search__border"></div>
           <div className="search__toggle">
             <label className="search__tumbler">
-              <input type="checkbox" className="search__checkbox" onChange={handleCheckbox}/>
+              <input
+                type="checkbox"
+                className="search__checkbox"
+                onChange={handleCheckbox}
+                checked={checkbox}
+                id="seachCheckbox"
+              />
               <span className="search__slider" />
             </label>
             <p className="search__films">Короткометражки</p>

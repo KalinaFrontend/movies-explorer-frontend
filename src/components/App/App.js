@@ -20,12 +20,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false);
-
-
-  useEffect(() => {
-    handleTokenCheck();
-    handleSaveMovie();
-  }, [loggedIn]);
+  const [checkToken, setCheckToken] = useState(false);
 
   //Получить список сохраненных фильмов
   const handleSaveMovie = async () => {
@@ -39,19 +34,24 @@ function App() {
 
   //Проверить токен
   const handleTokenCheck = async () => {
-
     const jwt = localStorage.getItem("jwt");
     if (!jwt) {
-      return;
+      return setCheckToken(true);;
     }
     try {
-      setLoggedIn(true);
       const userInfo = await api.getUserInfo();
       setCurrentUser(userInfo);
+      setLoggedIn(true);
+      setCheckToken(true);
     } catch (e) {
       console.warn(e);
     }
   };
+
+  useEffect(() => {
+    handleTokenCheck();
+    handleSaveMovie();
+  }, []);
 
   //Авторизоваться
   const handleAuthorization = async (data) => {
@@ -61,6 +61,7 @@ function App() {
         localStorage.setItem("jwt", userToken.token);
         setLoggedIn(true);
         await handleTokenCheck();
+        await handleSaveMovie();
         navigate("/");
       }
     } catch (e) {
@@ -153,56 +154,51 @@ function App() {
             element={<Login onLogin={handleAuthorization} />}
           />
 
+
+            <Route
+              path="/movies"
+              element={
+                <ProtectedRoute checkToken={checkToken} loggedIn={loggedIn}>
+                  <Header auth={loggedIn} />
+                  <Movies
+                    handleTokenCheck={handleTokenCheck}
+                    savedMovies={savedMovies}
+                    onSave={handleSaveMovies}
+                    onDelete={handleDeleteMovies}
+                  />
+                  <Footer />
+                </ProtectedRoute>
+              }
+            />
+
+
           <Route
-            exact
-            path="/movies"
-            element={
-              <>
-                <Header auth={loggedIn} />
-                <ProtectedRoute
-                  element={Movies}
-                  loggedIn={loggedIn}
-                  handleTokenCheck={handleTokenCheck}
-                  savedMovies={savedMovies}
-                  onSave={handleSaveMovies}
-                  onDelete={handleDeleteMovies}
-                />
-                <Footer />
-              </>
-            }
-          />
-          <Route
-            exact
             path="/saved-movies"
             element={
-              <>
+              <ProtectedRoute checkToken={checkToken} loggedIn={loggedIn}>
                 <Header auth={loggedIn} />
-                <ProtectedRoute
-                  element={SavedMovies}
-                  loggedIn={loggedIn}
+                <SavedMovies
                   handleTokenCheck={handleTokenCheck}
                   savedMovies={savedMovies}
                   onSave={handleSaveMovies}
                   onDelete={handleDeleteMovies}
                 />
                 <Footer />
-              </>
+              </ProtectedRoute>
             }
           />
+
           <Route
-            exact
             path="/profile"
             element={
-              <>
+              <ProtectedRoute checkToken={checkToken} loggedIn={loggedIn}>
                 <Header auth={loggedIn} />
-                <ProtectedRoute
-                  element={Profile}
-                  loggedIn={loggedIn}
+                <Profile
                   handleTokenCheck={handleTokenCheck}
                   updateUser={handleUpdateUserInfo}
                   onLogin={handleLoginOut}
                 />
-              </>
+              </ProtectedRoute>
             }
           />
           <Route exact path="/*" element={<NotFindPage />} />

@@ -33,7 +33,6 @@ const Movies = (props) => {
       console.warn(e);
     }
   };
-
   return (
     <main className="content">
       <div className="movies">
