@@ -25,21 +25,21 @@ function SearchForm({ onCard, tag, onReset }) {
   );
   */
 
-  // загрузить состояние checkbox из localStorage и програзуть страницу
+  // загрузить состояние checkbox из localStorage и прогрузить страницу
   useEffect(() => {
-    const checked = JSON.parse(localStorage.getItem("checkbox"));
     if (!tag) {
+      const checked = JSON.parse(localStorage.getItem("checkbox"));
       const valueInput = JSON.parse(localStorage.getItem("line"));
       if (valueInput) {
         setSearchTerm(valueInput)
       }
-    }
-    if (checked === true) {
-      setCheckbox(true);
-      setRender(true);
+      if (checked === true) {
+        setCheckbox(true);
+      } 
     }
     setRender(true);
   }, []);
+  
 
   // сабмит формы поиска
   const handleSubmit = (e) => {
@@ -61,7 +61,10 @@ function SearchForm({ onCard, tag, onReset }) {
   // переключатель состояния checkbox
   const handleCheckbox = () => {
     setCheckbox(!checkbox);
-    localStorage.setItem("checkbox", JSON.stringify(!checkbox));
+    if (!tag) {
+      localStorage.setItem("checkbox", JSON.stringify(!checkbox));
+    }
+    onCard(searchTerm, !checkbox);
   };
 
    return render &&(
@@ -81,7 +84,7 @@ function SearchForm({ onCard, tag, onReset }) {
           <input
             className="search__input"
             placeholder="Фильм"
-            minLength="2"
+            minLength="1"
             maxLength="30"
             type="text"
             defaultValue={searchTerm}
@@ -104,7 +107,7 @@ function SearchForm({ onCard, tag, onReset }) {
                 checked={checkbox}
                 id="seachCheckbox"
               />
-              <span className="search__slider" />
+              <span className="search__slider search__slider_off" />
             </label>
             <p className="search__films">Короткометражки</p>
           </div>
@@ -112,7 +115,7 @@ function SearchForm({ onCard, tag, onReset }) {
         <div className="search__toggle search__toggle_mini-size">
           <label className="search__tumbler">
             <input type="checkbox" className="search__checkbox" />
-            <span className="search__slider" />
+            <span className="search__slider search__slider_off" />
           </label>
           <p className="search__films">Короткометражки</p>
         </div>

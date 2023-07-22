@@ -10,6 +10,7 @@ import Profile from "../Profile/Profile";
 import Register from "../Register/Register";
 import Login from "../Login/Login";
 import NotFindPage from "../NotFindPage/NotFindPage";
+import InfoTooltip from "../InfoTooltip/InfoTooltip";
 import * as auth from "../../utils/auth";
 import * as api from "../../utils/mainApi";
 import * as moviesApi from "../../utils/MoviesApi";
@@ -20,32 +21,40 @@ function App() {
   const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState([]); // пользовательские данные
   const [savedMovies, setSavedMovies] = useState([]); // список сохраненных фильмов
-  const [movies, setMovies] = useState([]); // список фильмов полученных из Api
   const [loggedIn, setLoggedIn] = useState(false);  // статус авторизации пользователя
   const [render, setRender] = useState(false);  // статус получения всех данных для рендера разметки
+  const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false); // попап информационной панели
+  const [isRegistrationSuccessful, setIsRegistrationSuccessful] = useState(null); // состояние регистрации
 
+
+    //Закрать все PopUp
+    const closeAllPopups = () => {
+      setIsInfoTooltipOpen(false);
+    };
 
   //Получить список сохраненных фильмов
   const handleSaveMovie = async () => {
     try {
       const data = await api.getMovies();
       setSavedMovies(data);
+      setRender(true);
     } catch (e) {
       console.warn(e);
+      setRender(true);
     }
+
   };
 
   //Проверить токен
   const handleTokenCheck = async () => {
     const jwt = localStorage.getItem("jwt");
     if (!jwt) {
-      return setRender(true);;
+      return
     }
     try {
       const userInfo = await api.getUserInfo();
       setCurrentUser(userInfo);
       setLoggedIn(true);
-      setRender(true);
     } catch (e) {
       console.warn(e);
     }
@@ -77,9 +86,12 @@ function App() {
   const handleRegistration = async (data) => {
     try {
       await auth.registration(data);
+      setIsRegistrationSuccessful(true);
+      setIsInfoTooltipOpen(true);
       navigate("/signin");
     } catch (e) {
       console.warn(e);
+      setIsInfoTooltipOpen(true);
     }
   };
 
@@ -138,8 +150,7 @@ function App() {
   //  Загрузить список фильмов
   const handleGetMovies = async() => {
     try {
-      const data = await moviesApi.getMovies();
-      setMovies(data);
+      const data = await moviesApi.getMovies()
     } catch (e) {
       console.warn(e);
     }
@@ -222,6 +233,7 @@ function App() {
           />
           <Route exact path="/*" element={<NotFindPage />} />
         </Routes>
+        <InfoTooltip isOpen={isInfoTooltipOpen} onClose={closeAllPopups} isSuccess={isRegistrationSuccessful}/>
       </div>
     </CurrentUserContext.Provider>
   );

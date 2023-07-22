@@ -10,7 +10,6 @@ import SearchErrorServer from "../SearchErrorServer/SearchErrorServer";
 const SavedMovies = ({ savedMovies, onSave, onDelete }) => {
   const [movies, setMovies] = useState([]); // сохранение фильмов для поиска
   const [render, setRender] = useState(true); // состояние загрузки фильмов из базы
-  const [startRender, setStartRender] = useState(true); // состояние стартовой загрузки страницы
   const [notFind, setNotFind] = useState(false); // пользователь не найден
   const [requestEror, setRequestEror] = useState(false); // ошибка запроса
 
@@ -25,6 +24,7 @@ const SavedMovies = ({ savedMovies, onSave, onDelete }) => {
       setNotFind(false);
       const  tagSavedMovies = true
       const findMovies = seachCards(savedMovies, line, checkbox, tagSavedMovies);
+      console.log(findMovies)
       if (findMovies.length === 0) {
         setNotFind(true);
       } else {
@@ -38,7 +38,8 @@ const SavedMovies = ({ savedMovies, onSave, onDelete }) => {
     }
   };
 
-  return (
+
+  return  (
     <main className="content">
       <section className="saved-movies">
         <SearchForm onCard={handleSeachCards} tag="saved-movies" />

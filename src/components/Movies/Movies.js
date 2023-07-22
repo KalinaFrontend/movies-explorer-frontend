@@ -17,13 +17,11 @@ const Movies = (props) => {
   const [requestEror, setRequestEror] = useState(false); // ошибка запроса
 
   useEffect(() => {
-    setStartRender(false);
+
     const findMovies = JSON.parse(localStorage.getItem("findMovies"));
     if (findMovies) {
       setMovies(findMovies);
-      setStartRender(true);
     }
-    setStartRender(true);
   }, []);
   
   const handleMoviesReset = ()=> {
@@ -51,7 +49,6 @@ const Movies = (props) => {
   };
 
   return (
-    startRender && (
       <main className="content">
         <div className="movies">
           <SearchForm onCard={handleSeachCards} onReset={handleMoviesReset}/>
@@ -70,7 +67,6 @@ const Movies = (props) => {
           )}
         </div>
       </main>
-    )
   );
 };
 
