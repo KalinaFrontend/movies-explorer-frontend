@@ -21,49 +21,49 @@ function App() {
   const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState([]); // пользовательские данные
   const [savedMovies, setSavedMovies] = useState([]); // список сохраненных фильмов
-  const [loggedIn, setLoggedIn] = useState(false);  // статус авторизации пользователя
-  const [render, setRender] = useState(false);  // статус получения всех данных для рендера разметки
+  const [loggedIn, setLoggedIn] = useState(false); // статус авторизации пользователя
+  const [render, setRender] = useState(false); // статус получения всех данных для рендера разметки
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false); // попап информационной панели
-  const [isRegistrationSuccessful, setIsRegistrationSuccessful] = useState(null); // состояние регистрации
+  const [isRegistrationSuccessful, setIsRegistrationSuccessful] =
+    useState(null); // состояние регистрации
 
-
-    //Закрать все PopUp
-    const closeAllPopups = () => {
-      setIsInfoTooltipOpen(false);
-    };
+  //Закрать все PopUp
+  const closeAllPopups = () => {
+    setIsInfoTooltipOpen(false);
+  };
 
   //Получить список сохраненных фильмов
   const handleSaveMovie = async () => {
     try {
       const data = await api.getMovies();
-      setSavedMovies(data);
-      setRender(true);
+        setSavedMovies(data);
     } catch (e) {
       console.warn(e);
-      setRender(true);
-    }
 
+    }
   };
 
   //Проверить токен
   const handleTokenCheck = async () => {
     const jwt = localStorage.getItem("jwt");
     if (!jwt) {
-      return
+      return;
     }
     try {
+      await handleSaveMovie();
       const userInfo = await api.getUserInfo();
       setCurrentUser(userInfo);
       setLoggedIn(true);
+      setRender(true);
     } catch (e) {
       console.warn(e);
+      setRender(true);
     }
   };
 
-  // 
+  //
   useEffect(() => {
     handleTokenCheck();
-    handleSaveMovie();
   }, []);
 
   //Авторизоваться
@@ -129,9 +129,10 @@ function App() {
   //Удалить фильм
   const handleDeleteMovies = async (data) => {
     try {
-      const maessage = await api.deleteMovies(data);
-      console.log(maessage);
-      await handleSaveMovie();
+          const maessage = await api.deleteMovies(data);
+          console.log(maessage);
+          await handleSaveMovie();
+          return
     } catch (e) {
       console.warn(e);
     }
@@ -147,17 +148,7 @@ function App() {
     navigate("/");
   };
 
-  //  Загрузить список фильмов
-  const handleGetMovies = async() => {
-    try {
-      const data = await moviesApi.getMovies()
-    } catch (e) {
-      console.warn(e);
-    }
-  }
-
-
-  return (
+  return render && (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
         <Routes>
@@ -175,32 +166,30 @@ function App() {
           <Route
             exact
             path="/signup"
-            element={<Register onLogin={handleRegistration} />}
+            element={<Register onLogin={handleRegistration} auth={loggedIn}/>}
           />
           <Route
             exact
             path="/signin"
-            element={<Login onLogin={handleAuthorization} />}
+            element={<Login onLogin={handleAuthorization} auth={loggedIn}/>}
           />
 
-
-            <Route
-              path="/movies"
-              element={
-                <ProtectedRoute render={render} loggedIn={loggedIn}>
-                  <Header auth={loggedIn} />
-                  <Movies
-                    handleTokenCheck={handleTokenCheck}
-                    savedMovies={savedMovies}
-                    onSave={handleSaveMovies}
-                    onDelete={handleDeleteMovies}
-                    onRender={render}
-                  />
-                  <Footer />
-                </ProtectedRoute>
-              }
-            />
-
+          <Route
+            path="/movies"
+            element={
+              <ProtectedRoute render={render} loggedIn={loggedIn}>
+                <Header auth={loggedIn} />
+                <Movies
+                  handleTokenCheck={handleTokenCheck}
+                  savedMovies={savedMovies}
+                  onSave={handleSaveMovies}
+                  onDelete={handleDeleteMovies}
+                  onRender={render}
+                />
+                <Footer />
+              </ProtectedRoute>
+            }
+          />
 
           <Route
             path="/saved-movies"
@@ -233,7 +222,11 @@ function App() {
           />
           <Route exact path="/*" element={<NotFindPage />} />
         </Routes>
-        <InfoTooltip isOpen={isInfoTooltipOpen} onClose={closeAllPopups} isSuccess={isRegistrationSuccessful}/>
+        <InfoTooltip
+          isOpen={isInfoTooltipOpen}
+          onClose={closeAllPopups}
+          isSuccess={isRegistrationSuccessful}
+        />
       </div>
     </CurrentUserContext.Provider>
   );

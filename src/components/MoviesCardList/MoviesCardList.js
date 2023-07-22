@@ -55,7 +55,7 @@ const MoviesCardList = ({ cards, flag, savedMovies, onSave, onDelete }) => {
         {cards.map((card, index) => {
             if (index < maxMovies) {
               return (
-                <MoviesCard  key={card.id || card.movieId} card={card}  flag={flag}  savedMovies={savedMovies} onSave={onSave} onDelete={onDelete} />
+                <MoviesCard  key={card.id || card.movieId} card={card}  flag={flag}  savedMovies={savedMovies} onSave={onSave} onDelete={onDelete}/>
               );
             }
             return null;

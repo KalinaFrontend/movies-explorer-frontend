@@ -1,8 +1,9 @@
 import React from "react";
 import Authorization from "../Authorization/Authorization";
+import { Navigate } from "react-router-dom"
 
 function Register(props) {
-  return (
+  return ( !props.auth ?
     <main>
       <Authorization
         authType="register"
@@ -15,6 +16,8 @@ function Register(props) {
         onLogin={props.onLogin}
       />
     </main>
+    :
+    <Navigate to="/movies"/>
   );
 }
 

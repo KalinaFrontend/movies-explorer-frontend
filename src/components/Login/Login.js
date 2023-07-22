@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Authorization from "../Authorization/Authorization";
+import { Navigate } from "react-router-dom";
 
 function Login(props) {
 
 
-  return (
+  return ( !props.auth ?
     <main>
       <Authorization
         authType="login"
@@ -16,6 +17,8 @@ function Login(props) {
         onLogin={props.onLogin}
       />
     </main>
+    :
+    (<Navigate to="/movies" />)
   );
 }
 

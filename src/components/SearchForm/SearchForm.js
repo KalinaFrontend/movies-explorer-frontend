@@ -45,7 +45,6 @@ function SearchForm({ onCard, tag, onReset }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (tag) {
-      console.log(tag)
       return onCard(searchTerm, checkbox);
     }
     if (document.querySelector(".search__input").value.length === 0) {

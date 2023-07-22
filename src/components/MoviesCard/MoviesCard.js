@@ -9,7 +9,6 @@ const MoviesCard = ({ card, flag, savedMovies, onSave, onDelete }) => {
 
   useEffect(() => {
     if (savedMovies) {
-      console.log(savedMovies);
       savedMovies.forEach((movies) => {
         if (movies.movieId === card.id || movies.id === card.id) {
           setSaveMovieId(movies._id);
@@ -18,7 +17,7 @@ const MoviesCard = ({ card, flag, savedMovies, onSave, onDelete }) => {
       });
     }
     setRender(true);
-  }, [saveMovie]);
+  }, [savedMovies]);
 
   const handleSaveMovie = async () => {
     if (!saveMovie && flag === "add-favorites-btn") {

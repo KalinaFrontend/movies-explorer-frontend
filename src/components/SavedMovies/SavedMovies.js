@@ -12,10 +12,12 @@ const SavedMovies = ({ savedMovies, onSave, onDelete }) => {
   const [render, setRender] = useState(true); // состояние загрузки фильмов из базы
   const [notFind, setNotFind] = useState(false); // пользователь не найден
   const [requestEror, setRequestEror] = useState(false); // ошибка запроса
+  const [newSavedMovies, setNewSavedMovies] = useState(null); // список сохраненных фильмов
 
   useEffect(() => {
     setMovies(savedMovies);
-  }, [savedMovies]);
+  }, []);
+
 
   const handleSeachCards = async (line, checkbox) => {
     try {
@@ -24,7 +26,6 @@ const SavedMovies = ({ savedMovies, onSave, onDelete }) => {
       setNotFind(false);
       const  tagSavedMovies = true
       const findMovies = seachCards(savedMovies, line, checkbox, tagSavedMovies);
-      console.log(findMovies)
       if (findMovies.length === 0) {
         setNotFind(true);
       } else {
@@ -39,6 +40,22 @@ const SavedMovies = ({ savedMovies, onSave, onDelete }) => {
   };
 
 
+
+  const handleDeleteMovies = (card) => {
+    onDelete(card, true);
+    const savedMoviesNew = movies.slice();
+    savedMoviesNew.splice(movies.findIndex((a) => a._id === card), 1);
+    movies.splice(movies.findIndex((a) => a._id === card), 1);
+    setNewSavedMovies(savedMoviesNew);
+  }
+
+  useEffect(()=> {
+    if(newSavedMovies) {
+      setMovies(newSavedMovies);
+    }
+  }, [newSavedMovies])
+
+
   return  (
     <main className="content">
       <section className="saved-movies">
@@ -51,7 +68,7 @@ const SavedMovies = ({ savedMovies, onSave, onDelete }) => {
             flag="delete-favorites-btn"
             savedMovies={savedMovies}
             onSave={onSave}
-            onDelete={onDelete}
+            onDelete={handleDeleteMovies}
           />
         ) : (
           <Preloader />
