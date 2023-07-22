@@ -3,10 +3,11 @@ import { useState, useEffect } from "react";
 import "./MoviesCard.css";
 
 const MoviesCard = ({ card, flag, savedMovies, onSave, onDelete }) => {
-  const [saveMovie, setSaveMovie] = useState(false);
-  const [saveMovieId, setSaveMovieId] = useState(null);
+  const [saveMovie, setSaveMovie] = useState(false); // состояние лайка
+  const [saveMovieId, setSaveMovieId] = useState(null); // id фильма для его удаления
   const [render, setRender] = useState(false); // состояние загрузки фильмов из базы
 
+  // получение лайков
   useEffect(() => {
     if (savedMovies) {
       savedMovies.forEach((movies) => {
@@ -17,8 +18,10 @@ const MoviesCard = ({ card, flag, savedMovies, onSave, onDelete }) => {
       });
     }
     setRender(true);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [savedMovies]);
 
+  // сохраненение или удаление лайка
   const handleSaveMovie = async () => {
     if (!saveMovie && flag === "add-favorites-btn") {
       try {

@@ -13,7 +13,6 @@ import NotFindPage from "../NotFindPage/NotFindPage";
 import InfoTooltip from "../InfoTooltip/InfoTooltip";
 import * as auth from "../../utils/auth";
 import * as api from "../../utils/mainApi";
-import * as moviesApi from "../../utils/MoviesApi";
 import ProtectedRoute from "../ProtectedRoute";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
@@ -64,6 +63,7 @@ function App() {
   //
   useEffect(() => {
     handleTokenCheck();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   //Авторизоваться

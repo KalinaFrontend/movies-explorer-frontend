@@ -7,23 +7,6 @@ function SearchForm({ onCard, tag, onReset }) {
   const [searchTerm, setSearchTerm] = useState(""); // значение input поиска
   const [checkbox, setCheckbox] = useState(false); // состояние checkbox
   const [render, setRender] = useState(false); // состояние загрузки даных из localStorage
-  /*
-  // авто поиск через 3сек после ввода
-  useEffect(
-    (e) => {
-      const delayRequest = setTimeout(() => {
-        props.onCard(searchTerm, checkbox);
-      }, 3000);
-      if (isStart) {
-        props.onCard(searchTerm, checkbox);
-        setIsStart(false);
-        return () => clearTimeout(delayRequest);
-      }
-      return () => clearTimeout(delayRequest);
-    },
-    [props, searchTerm, isStart, checkbox]
-  );
-  */
 
   // загрузить состояние checkbox из localStorage и прогрузить страницу
   useEffect(() => {
@@ -38,6 +21,7 @@ function SearchForm({ onCard, tag, onReset }) {
       } 
     }
     setRender(true);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   
 

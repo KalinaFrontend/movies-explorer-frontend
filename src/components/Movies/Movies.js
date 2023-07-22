@@ -7,27 +7,26 @@ import * as moviesApi from "../../utils/MoviesApi";
 import { seachCards } from "../../utils/searchMovies";
 import SearchError from "../SearchError/SearchError";
 import SearchErrorServer from "../SearchErrorServer/SearchErrorServer";
-import { render } from "@testing-library/react";
 
 const Movies = (props) => {
-  const [movies, setMovies] = useState([]);
+  const [movies, setMovies] = useState([]); // список сохраненных фильмов
   const [render, setRender] = useState(true); // состояние загрузки фильмов из базы
-  const [startRender, setStartRender] = useState(true); // состояние стартовой загрузки страницы
   const [notFind, setNotFind] = useState(false); // пользователь не найден
   const [requestEror, setRequestEror] = useState(false); // ошибка запроса
 
   useEffect(() => {
-
     const findMovies = JSON.parse(localStorage.getItem("findMovies"));
     if (findMovies) {
       setMovies(findMovies);
     }
   }, []);
   
+  // обнуление списка фильмов
   const handleMoviesReset = ()=> {
     setMovies([]);
   }
 
+  // поиск фильмов
   const handleSeachCards = async (line, checkbox) => {
     try {
       setRender(false);

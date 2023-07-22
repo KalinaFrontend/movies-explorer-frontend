@@ -47,6 +47,7 @@ const MoviesCardList = ({ cards, flag, savedMovies, onSave, onDelete }) => {
           setMoviesRules();
         }, 500);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
   return (

@@ -14,11 +14,14 @@ const SavedMovies = ({ savedMovies, onSave, onDelete }) => {
   const [requestEror, setRequestEror] = useState(false); // ошибка запроса
   const [newSavedMovies, setNewSavedMovies] = useState(null); // список сохраненных фильмов
 
+  // разрузка сохраненных фильмов 
   useEffect(() => {
     setMovies(savedMovies);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
 
+  // поиск фильмов
   const handleSeachCards = async (line, checkbox) => {
     try {
       setRender(false);
@@ -40,7 +43,7 @@ const SavedMovies = ({ savedMovies, onSave, onDelete }) => {
   };
 
 
-
+  // удаление сохраненного фильма
   const handleDeleteMovies = (card) => {
     onDelete(card, true);
     const savedMoviesNew = movies.slice();
@@ -49,6 +52,7 @@ const SavedMovies = ({ savedMovies, onSave, onDelete }) => {
     setNewSavedMovies(savedMoviesNew);
   }
 
+  // рендер списока фильмов при удалении
   useEffect(()=> {
     if(newSavedMovies) {
       setMovies(newSavedMovies);

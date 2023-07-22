@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./Authorization.css";
 import Logo from "../Logo/Logo";
 import Forms from "../../utils/validation";
