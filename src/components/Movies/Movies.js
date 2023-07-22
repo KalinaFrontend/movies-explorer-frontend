@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Movies.css";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
@@ -7,16 +7,32 @@ import * as moviesApi from "../../utils/MoviesApi";
 import { seachCards } from "../../utils/searchMovies";
 import SearchError from "../SearchError/SearchError";
 import SearchErrorServer from "../SearchErrorServer/SearchErrorServer";
+import { render } from "@testing-library/react";
 
 const Movies = (props) => {
   const [movies, setMovies] = useState([]);
-  const [isLoading, setIsLoading] = useState(false); // состояние загрузки фильмов из базы
+  const [render, setRender] = useState(true); // состояние загрузки фильмов из базы
+  const [startRender, setStartRender] = useState(true); // состояние стартовой загрузки страницы
   const [notFind, setNotFind] = useState(false); // пользователь не найден
   const [requestEror, setRequestEror] = useState(false); // ошибка запроса
 
+  useEffect(() => {
+    setStartRender(false);
+    const findMovies = JSON.parse(localStorage.getItem("findMovies"));
+    if (findMovies) {
+      setMovies(findMovies);
+      setStartRender(true);
+    }
+    setStartRender(true);
+  }, []);
+  
+  const handleMoviesReset = ()=> {
+    setMovies([]);
+  }
+
   const handleSeachCards = async (line, checkbox) => {
     try {
-      setIsLoading(true);
+      setRender(false);
       setRequestEror(false);
       setNotFind(false);
       const data = await moviesApi.getMovies();
@@ -27,25 +43,34 @@ const Movies = (props) => {
         setNotFind(false);
       }
       setMovies(findMovies);
-      setIsLoading(false);
+      setRender(true);
     } catch (e) {
       setRequestEror(true);
       console.warn(e);
     }
   };
+
   return (
-    <main className="content">
-      <div className="movies">
-        <SearchForm onCard={handleSeachCards} />
-        {notFind && <SearchError />}
-        {requestEror && <SearchErrorServer />}
-        {isLoading ? (
-          <Preloader />
-        ) : (
-          <MoviesCardList cards={movies} flag="add-favorites-btn"  savedMovies={props.savedMovies} onSave={props.onSave} onDelete={props.onDelete} />
-        )}
-      </div>
-    </main>
+    startRender && (
+      <main className="content">
+        <div className="movies">
+          <SearchForm onCard={handleSeachCards} onReset={handleMoviesReset}/>
+          {notFind && <SearchError />}
+          {requestEror && <SearchErrorServer />}
+          {render ? (
+            <MoviesCardList
+              cards={movies}
+              flag="add-favorites-btn"
+              savedMovies={props.savedMovies}
+              onSave={props.onSave}
+              onDelete={props.onDelete}
+            />
+          ) : (
+            <Preloader />
+          )}
+        </div>
+      </main>
+    )
   );
 };
 

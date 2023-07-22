@@ -12,15 +12,18 @@ import Login from "../Login/Login";
 import NotFindPage from "../NotFindPage/NotFindPage";
 import * as auth from "../../utils/auth";
 import * as api from "../../utils/mainApi";
+import * as moviesApi from "../../utils/MoviesApi";
 import ProtectedRoute from "../ProtectedRoute";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 function App() {
   const navigate = useNavigate();
-  const [currentUser, setCurrentUser] = useState([]);
-  const [savedMovies, setSavedMovies] = useState([]);
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [checkToken, setCheckToken] = useState(false);
+  const [currentUser, setCurrentUser] = useState([]); // пользовательские данные
+  const [savedMovies, setSavedMovies] = useState([]); // список сохраненных фильмов
+  const [movies, setMovies] = useState([]); // список фильмов полученных из Api
+  const [loggedIn, setLoggedIn] = useState(false);  // статус авторизации пользователя
+  const [render, setRender] = useState(false);  // статус получения всех данных для рендера разметки
+
 
   //Получить список сохраненных фильмов
   const handleSaveMovie = async () => {
@@ -36,18 +39,19 @@ function App() {
   const handleTokenCheck = async () => {
     const jwt = localStorage.getItem("jwt");
     if (!jwt) {
-      return setCheckToken(true);;
+      return setRender(true);;
     }
     try {
       const userInfo = await api.getUserInfo();
       setCurrentUser(userInfo);
       setLoggedIn(true);
-      setCheckToken(true);
+      setRender(true);
     } catch (e) {
       console.warn(e);
     }
   };
 
+  // 
   useEffect(() => {
     handleTokenCheck();
     handleSaveMovie();
@@ -62,7 +66,7 @@ function App() {
         setLoggedIn(true);
         await handleTokenCheck();
         await handleSaveMovie();
-        navigate("/");
+        navigate("/movies");
       }
     } catch (e) {
       console.warn(e);
@@ -125,8 +129,22 @@ function App() {
   const handleLoginOut = () => {
     setLoggedIn(false);
     localStorage.removeItem("jwt");
+    localStorage.removeItem("findMovies");
+    localStorage.removeItem("line");
+    localStorage.removeItem("checkbox");
     navigate("/");
   };
+
+  //  Загрузить список фильмов
+  const handleGetMovies = async() => {
+    try {
+      const data = await moviesApi.getMovies();
+      setMovies(data);
+    } catch (e) {
+      console.warn(e);
+    }
+  }
+
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -158,13 +176,14 @@ function App() {
             <Route
               path="/movies"
               element={
-                <ProtectedRoute checkToken={checkToken} loggedIn={loggedIn}>
+                <ProtectedRoute render={render} loggedIn={loggedIn}>
                   <Header auth={loggedIn} />
                   <Movies
                     handleTokenCheck={handleTokenCheck}
                     savedMovies={savedMovies}
                     onSave={handleSaveMovies}
                     onDelete={handleDeleteMovies}
+                    onRender={render}
                   />
                   <Footer />
                 </ProtectedRoute>
@@ -175,7 +194,7 @@ function App() {
           <Route
             path="/saved-movies"
             element={
-              <ProtectedRoute checkToken={checkToken} loggedIn={loggedIn}>
+              <ProtectedRoute render={render} loggedIn={loggedIn}>
                 <Header auth={loggedIn} />
                 <SavedMovies
                   handleTokenCheck={handleTokenCheck}
@@ -191,7 +210,7 @@ function App() {
           <Route
             path="/profile"
             element={
-              <ProtectedRoute checkToken={checkToken} loggedIn={loggedIn}>
+              <ProtectedRoute render={render} loggedIn={loggedIn}>
                 <Header auth={loggedIn} />
                 <Profile
                   handleTokenCheck={handleTokenCheck}

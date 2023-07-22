@@ -48,12 +48,13 @@ function Authorization(props) {
               name="email"
               minLength="2"
               maxLength="30"
+              pattern="[A-Za-z0-9._+\-']+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}$"
               value={values.email || ""}
               onChange={handleChange}
               required
             />
           </li>
-          <p className="authorization__validation-text">{errors.email}</p>
+          <p className="authorization__validation-text">{errors.email && "Введите данные в формате name@hostname.ru"}</p>
           <li className="authorization__part-form">
             <p className="authorization__name">Пароль</p>
             <input

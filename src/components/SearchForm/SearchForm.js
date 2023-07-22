@@ -3,10 +3,10 @@ import "./SearchForm.css";
 import search from "../../images/search-form__search-button.svg";
 import searchBtn from "../../images/search__button-btn.svg";
 
-function SearchForm(props) {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [checkbox, setCheckbox] = useState(false);
-  const [render, setRender] = useState(false);
+function SearchForm({ onCard, tag, onReset }) {
+  const [searchTerm, setSearchTerm] = useState(""); // значение input поиска
+  const [checkbox, setCheckbox] = useState(false); // состояние checkbox
+  const [render, setRender] = useState(false); // состояние загрузки даных из localStorage
   /*
   // авто поиск через 3сек после ввода
   useEffect(
@@ -25,35 +25,40 @@ function SearchForm(props) {
   );
   */
 
+  // загрузить состояние checkbox из localStorage и програзуть страницу
   useEffect(() => {
     const checked = JSON.parse(localStorage.getItem("checkbox"));
+    if (!tag) {
+      const valueInput = JSON.parse(localStorage.getItem("line"));
+      if (valueInput) {
+        setSearchTerm(valueInput)
+      }
+    }
     if (checked === true) {
       setCheckbox(true);
       setRender(true);
-      //   document.getElementById("seachCheckbox").checked = true;
     }
     setRender(true);
   }, []);
 
-  /*
-  // проверить состояние чекбокса
-  const checkСheckbox = () => {
-      setCheckbox(!checkbox);
-  };
-  */
-
+  // сабмит формы поиска
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (props.tag) {
-      return props.onCard(searchTerm, checkbox);
+    if (tag) {
+      console.log(tag)
+      return onCard(searchTerm, checkbox);
     }
     if (document.querySelector(".search__input").value.length === 0) {
+      localStorage.removeItem('findMovies');
+      localStorage.removeItem('line');
+      onReset();
       return (document.querySelector(".search__input").placeholder =
         "Введите сообщение для поиска");
     }
-    props.onCard(searchTerm, checkbox);
+    onCard(searchTerm, checkbox);
   };
 
+  // переключатель состояния checkbox
   const handleCheckbox = () => {
     setCheckbox(!checkbox);
     localStorage.setItem("checkbox", JSON.stringify(!checkbox));
@@ -79,6 +84,7 @@ function SearchForm(props) {
             minLength="2"
             maxLength="30"
             type="text"
+            defaultValue={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
           <button type="submit" className="search__button">

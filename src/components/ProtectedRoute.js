@@ -1,9 +1,9 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
 
-function ProtectedRoute({ children, checkToken, loggedIn }) {
+function ProtectedRoute({ children, render, loggedIn }) {
 
-   return checkToken && (loggedIn ? (children) : (<Navigate to="/" />));
+   return render && (loggedIn ? (children) : (<Navigate to="/" />));
 
 }
 
