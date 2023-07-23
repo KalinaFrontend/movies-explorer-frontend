@@ -97,7 +97,7 @@ function SearchForm({ onCard, tag, onReset }) {
         </div>
         <div className="search__toggle search__toggle_mini-size">
           <label className="search__tumbler">
-            <input type="checkbox" className="search__checkbox" />
+            <input type="checkbox" className="search__checkbox" onChange={handleCheckbox}/>
             <span className="search__slider search__slider_off" />
           </label>
           <p className="search__films">Короткометражки</p>
