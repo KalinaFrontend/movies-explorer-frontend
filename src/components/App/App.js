@@ -46,6 +46,7 @@ function App() {
   const handleTokenCheck = async () => {
     const jwt = localStorage.getItem("jwt");
     if (!jwt) {
+      setRender(true);
       return;
     }
     try {
@@ -148,7 +149,7 @@ function App() {
     navigate("/");
   };
 
-  return render && (
+  return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
         <Routes>
