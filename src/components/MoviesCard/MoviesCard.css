@@ -26,6 +26,8 @@
   }
 }
 
+
+
 .movies-card__link {
   text-decoration: none;
   display: flex;
@@ -70,16 +72,15 @@
   padding: 0;
   border: none;
   background-color: #fff;
+  transition: 1.5s;
 }
 
 .movies-card__add-favorites-btn_active {
   background-image: url("../../images/movies-card__add-favorites-btn_active.svg");
-}
-
-.movies-card__add-favorites-btn:hover {
-  background-image: url("../../images/movies-card__add-favorites-btn_active.svg");
   transition: 1.5s;
 }
+
+
 
 .movies-card__delete-favorites-btn_active {
   margin: 0;

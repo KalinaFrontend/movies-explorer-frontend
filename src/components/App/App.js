@@ -133,7 +133,6 @@ function App() {
           const maessage = await api.deleteMovies(data);
           console.log(maessage);
           await handleSaveMovie();
-          return
     } catch (e) {
       console.warn(e);
     }
