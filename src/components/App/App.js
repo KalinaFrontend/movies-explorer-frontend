@@ -13,6 +13,7 @@ import NotFindPage from "../NotFindPage/NotFindPage";
 import InfoTooltip from "../InfoTooltip/InfoTooltip";
 import * as auth from "../../utils/auth";
 import * as api from "../../utils/mainApi";
+import handlerError from "../../utils/errors";
 import ProtectedRoute from "../ProtectedRoute";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
@@ -25,6 +26,7 @@ function App() {
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false); // попап информационной панели
   const [isRegistrationSuccessful, setIsRegistrationSuccessful] =
     useState(null); // состояние регистрации
+  const [message, setMessage] = useState(null); // полученныя ошибка
 
   //Закрать все PopUp
   const closeAllPopups = () => {
@@ -35,10 +37,9 @@ function App() {
   const handleSaveMovie = async () => {
     try {
       const data = await api.getMovies();
-        setSavedMovies(data);
+      setSavedMovies(data);
     } catch (e) {
       console.warn(e);
-
     }
   };
 
@@ -64,7 +65,7 @@ function App() {
   //
   useEffect(() => {
     handleTokenCheck();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   //Авторизоваться
@@ -75,11 +76,12 @@ function App() {
         localStorage.setItem("jwt", userToken.token);
         setLoggedIn(true);
         await handleTokenCheck();
-        await handleSaveMovie();
         navigate("/movies");
       }
-    } catch (e) {
-      console.warn(e);
+    } catch (error) {
+      const errorServer = handlerError(error.status);
+      setMessage(errorServer);
+      setIsInfoTooltipOpen(true);
     }
   };
 
@@ -87,11 +89,13 @@ function App() {
   const handleRegistration = async (data) => {
     try {
       await auth.registration(data);
+      handleAuthorization(data);
       setIsRegistrationSuccessful(true);
+      setMessage("Пользователь успешно зарегистрирован");
       setIsInfoTooltipOpen(true);
-      navigate("/signin");
-    } catch (e) {
-      console.warn(e);
+    } catch (error) {
+      const errorServer = handlerError(error.status);
+      setMessage(errorServer);
       setIsInfoTooltipOpen(true);
     }
   };
@@ -111,8 +115,13 @@ function App() {
         };
       const userData = await api.updateUserInfo(data);
       setCurrentUser(userData);
-    } catch (e) {
-      console.warn(e);
+      setIsRegistrationSuccessful(true);
+      setMessage("Изменения успешно сохранены");
+      setIsInfoTooltipOpen(true);
+    } catch (error) {
+      const errorServer = handlerError(error.status);
+      setMessage(errorServer);
+      setIsInfoTooltipOpen(true);
     }
   };
 
@@ -124,17 +133,19 @@ function App() {
       await handleSaveMovie();
     } catch (e) {
       console.warn(e);
+      return e;
     }
   };
 
   //Удалить фильм
   const handleDeleteMovies = async (data) => {
     try {
-          const maessage = await api.deleteMovies(data);
-          console.log(maessage);
-          await handleSaveMovie();
+      const maessage = await api.deleteMovies(data);
+      console.log(maessage);
+      await handleSaveMovie();
     } catch (e) {
       console.warn(e);
+      return e;
     }
   };
 
@@ -166,12 +177,12 @@ function App() {
           <Route
             exact
             path="/signup"
-            element={<Register onLogin={handleRegistration} auth={loggedIn}/>}
+            element={<Register onLogin={handleRegistration} auth={loggedIn} />}
           />
           <Route
             exact
             path="/signin"
-            element={<Login onLogin={handleAuthorization} auth={loggedIn}/>}
+            element={<Login onLogin={handleAuthorization} auth={loggedIn} />}
           />
 
           <Route
@@ -226,6 +237,7 @@ function App() {
           isOpen={isInfoTooltipOpen}
           onClose={closeAllPopups}
           isSuccess={isRegistrationSuccessful}
+          onMessage={message}
         />
       </div>
     </CurrentUserContext.Provider>

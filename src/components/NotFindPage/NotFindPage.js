@@ -7,7 +7,7 @@ function NotFindPage() {
       <section className="not-find-page">
         <h1 className="not-find-page__title">404</h1>
         <p className="not-find-page__text">Страница не найдена</p>
-        <a className="not-find-page__link" href="/signin">
+        <a className="not-find-page__link" href="/">
           <button className="not-find-page__link-button" type="button">
             Назад
           </button>

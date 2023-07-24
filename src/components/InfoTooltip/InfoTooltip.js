@@ -2,15 +2,11 @@ import "../InfoTooltip/InfoTooltip.css"
 import checkmarkIcon from "../../images/checkmark.svg"
 import crossIcon from "../../images/cross.svg";
 import React from "react";
-import { useNavigate } from "react-router-dom";
 
-function InfoTooltip ({isOpen, onClose, isSuccess}) {
-
-    const navigate = useNavigate();
+function InfoTooltip ({isOpen, onClose, isSuccess, onMessage}) {
 
     const onCloseWindow = () => {
         onClose();
-        navigate("/signin");
     }
   return (
     <div className={
@@ -29,8 +25,8 @@ function InfoTooltip ({isOpen, onClose, isSuccess}) {
         />
         <h3 className="popup__info-tooltip-title">
           {isSuccess
-            ? 'Вы успешно зарегистрировались!'
-            : 'Что-то пошло не так! Попробуйте ещё раз.'}
+            ? `${onMessage}`
+            : `${onMessage}`}
         </h3>
       </div>
     </div>

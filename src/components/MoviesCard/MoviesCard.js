@@ -25,23 +25,25 @@ const MoviesCard = ({ card, flag, savedMovies, onSave, onDelete }) => {
   const handleSaveMovie = async () => {
     if (!saveMovie && flag === "add-favorites-btn") {
       try {
-        await onSave(card);
+        const answer = await onSave(card);
+        if(answer) return
         return setSaveMovie(true);
       } catch (e) {
         console.warn(e);
-        return setSaveMovie(false);
       }
     }
     try {
       if (card._id) {
-        await onDelete(card._id);
+        const answer = await onDelete(card._id);
+        console.log(answer)
+        if(answer) return
         return setSaveMovie(false);
       }
-      await onDelete(saveMovieId);
+      const answer = await onDelete(saveMovieId);
+      if(answer) return
       return setSaveMovie(false);
     } catch (e) {
       console.warn(e);
-      return setSaveMovie(true);
     }
   };
 
