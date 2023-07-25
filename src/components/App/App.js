@@ -28,6 +28,24 @@ function App() {
     useState(null); // состояние регистрации
   const [message, setMessage] = useState(null); // полученныя ошибка
 
+
+
+
+
+/*
+    const count = Array.from(document.querySelectorAll(".movies-card__card"))
+    .reduce(
+      (acc, { offsetTop: n }) => (
+        acc[acc.length - 1]?.[0] === n || acc.push([n, 0]),
+        acc[acc.length - 1][1]++,
+        acc
+      ),
+      []
+    )
+    .map((n) => n[1]);
+    setСomponentsRow(count[0]);
+}, [])
+*/
   //Закрать все PopUp
   const closeAllPopups = () => {
     setIsInfoTooltipOpen(false);
