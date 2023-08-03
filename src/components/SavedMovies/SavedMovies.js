@@ -45,8 +45,7 @@ const SavedMovies = ({ savedMovies, onSave, onDelete }) => {
 
   // удаление сохраненного фильма
   const handleDeleteMovies = async (card) => {
-    const answer = await onDelete(card, true);
-    console.log(answer)
+    const answer = await onDelete(card);
     if(answer) return answer
     const savedMoviesNew = movies.slice();
     savedMoviesNew.splice(movies.findIndex((a) => a._id === card), 1);

@@ -9,6 +9,7 @@ const MoviesCard = ({ card, flag, savedMovies, onSave, onDelete }) => {
 
   // получение лайков
   useEffect(() => {
+
     if (savedMovies) {
       savedMovies.forEach((movies) => {
         if (movies.movieId === card.id || movies.id === card.id) {
@@ -17,6 +18,7 @@ const MoviesCard = ({ card, flag, savedMovies, onSave, onDelete }) => {
         }
       });
     }
+
     setRender(true);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [savedMovies]);
@@ -35,7 +37,6 @@ const MoviesCard = ({ card, flag, savedMovies, onSave, onDelete }) => {
     try {
       if (card._id) {
         const answer = await onDelete(card._id);
-        console.log(answer)
         if(answer) return
         return setSaveMovie(false);
       }

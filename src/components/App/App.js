@@ -28,11 +28,7 @@ function App() {
     useState(null); // состояние регистрации
   const [message, setMessage] = useState(null); // полученныя ошибка
 
-
-
-
-
-/*
+  /*
     const count = Array.from(document.querySelectorAll(".movies-card__card"))
     .reduce(
       (acc, { offsetTop: n }) => (
@@ -146,9 +142,8 @@ function App() {
   //Сохранить фильм
   const handleSaveMovies = async (data) => {
     try {
-      const maessage = await api.saveMovie(data);
-      console.log(maessage);
-      await handleSaveMovie();
+      const newData = await api.saveMovie(data);
+      setSavedMovies([...savedMovies, newData]);   
     } catch (e) {
       console.warn(e);
       return e;
@@ -160,7 +155,9 @@ function App() {
     try {
       const maessage = await api.deleteMovies(data);
       console.log(maessage);
-      await handleSaveMovie();
+      setSavedMovies((item) =>
+      item.filter((m) => m._id !== data)
+    );
     } catch (e) {
       console.warn(e);
       return e;
