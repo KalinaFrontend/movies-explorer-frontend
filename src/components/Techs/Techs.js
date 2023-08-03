@@ -26,7 +26,7 @@ function Techs() {
           <button className='technology__button' type='button'>Git</button>
         </a>
         <a className='technology__link' href='https://expressjs.com/ru/' target="_blank" rel="noreferrer">
-          <button className='technology__button' type='button'>Express.js</button>
+          <button className='technology__button' type='button'>Node.js</button>
         </a>
         <a className='technology__link' href='https://www.mongodb.com/' target="_blank" rel="noreferrer">
           <button className='technology__button' type='button'>mongoDB</button>

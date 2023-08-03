@@ -1,8 +1,11 @@
 import React from "react";
 import Authorization from "../Authorization/Authorization";
+import { Navigate } from "react-router-dom";
 
-function Login() {
-  return (
+function Login(props) {
+
+
+  return ( !props.auth ?
     <main>
       <Authorization
         authType="login"
@@ -11,8 +14,11 @@ function Login() {
         text="Ещё не зарегистрированы?"
         link="Регистрация"
         linkRout="/signup"
+        onLogin={props.onLogin}
       />
     </main>
+    :
+    (<Navigate to="/movies" />)
   );
 }
 

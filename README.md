@@ -4,3 +4,5 @@
 
 
 Frontend: https://kalina.movies.nomoredomains.rocks/
+
+Pull requests: https://github.com/KalinaFrontend/movies-explorer-frontend/pull/6
